@@ -1,0 +1,455 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/fonts/Formula1Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://ui/options_popup.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 18
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 22
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 22
+font_data = ExtResource( 1 )
+
+[node name="OptionsPopup" type="PopupPanel"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+use_parent_material = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 10.0
+margin_top = -207.0
+margin_right = -10.0
+margin_bottom = 207.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 10 )
+script = ExtResource( 3 )
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 2.0
+margin_top = -205.0
+margin_right = -2.0
+margin_bottom = 205.0
+custom_constants/separation = 20
+
+[node name="EnginePowerContainer" type="HBoxContainer" parent="Container"]
+margin_right = 1056.0
+margin_bottom = 23.0
+
+[node name="Container" type="HBoxContainer" parent="Container/EnginePowerContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/EnginePowerContainer/Container"]
+margin_right = 173.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "engine power"
+
+[node name="Value" type="Label" parent="Container/EnginePowerContainer/Container"]
+margin_left = 461.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(5.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/EnginePowerContainer"]
+margin_left = 530.0
+margin_top = 3.0
+margin_right = 1056.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.5
+value = 5.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="BrakingPowerContainer" type="HBoxContainer" parent="Container"]
+margin_top = 43.0
+margin_right = 1056.0
+margin_bottom = 66.0
+
+[node name="Container" type="HBoxContainer" parent="Container/BrakingPowerContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/BrakingPowerContainer/Container"]
+margin_right = 182.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 2 )
+text = "braking power"
+
+[node name="Value" type="Label" parent="Container/BrakingPowerContainer/Container"]
+margin_left = 453.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(-9.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/BrakingPowerContainer"]
+margin_left = 530.0
+margin_top = 3.0
+margin_right = 1056.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -10.0
+max_value = 0.0
+step = 0.5
+value = -9.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="MaxSpeedReverseContainer" type="HBoxContainer" parent="Container"]
+margin_top = 86.0
+margin_right = 1056.0
+margin_bottom = 109.0
+
+[node name="Container" type="HBoxContainer" parent="Container/MaxSpeedReverseContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/MaxSpeedReverseContainer/Container"]
+margin_right = 244.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 3 )
+text = "max speed reverse"
+
+[node name="Value" type="Label" parent="Container/MaxSpeedReverseContainer/Container"]
+margin_left = 461.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(5.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/MaxSpeedReverseContainer"]
+margin_left = 530.0
+margin_top = 3.0
+margin_right = 1056.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.5
+value = 5.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="MinSpeedDriftingContainer" type="HBoxContainer" parent="Container"]
+margin_top = 129.0
+margin_right = 1056.0
+margin_bottom = 152.0
+
+[node name="Container" type="HBoxContainer" parent="Container/MinSpeedDriftingContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/MinSpeedDriftingContainer/Container"]
+margin_right = 228.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 4 )
+text = "min speed drifting"
+
+[node name="Value" type="Label" parent="Container/MinSpeedDriftingContainer/Container"]
+margin_left = 460.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(9.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/MinSpeedDriftingContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 20.0
+value = 9.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="FrictionCoefficientContainer" type="HBoxContainer" parent="Container"]
+margin_top = 172.0
+margin_right = 1056.0
+margin_bottom = 195.0
+
+[node name="Container" type="HBoxContainer" parent="Container/FrictionCoefficientContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/FrictionCoefficientContainer/Container"]
+margin_right = 90.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "friction"
+
+[node name="Value" type="Label" parent="Container/FrictionCoefficientContainer/Container"]
+margin_left = 455.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(-2.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/FrictionCoefficientContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = -5.0
+max_value = 5.0
+step = 0.5
+value = -2.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="DragCoefficientContainer" type="HBoxContainer" parent="Container"]
+margin_top = 215.0
+margin_right = 1056.0
+margin_bottom = 238.0
+
+[node name="Container" type="HBoxContainer" parent="Container/DragCoefficientContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/DragCoefficientContainer/Container"]
+margin_right = 58.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 6 )
+text = "drag"
+
+[node name="Value" type="Label" parent="Container/DragCoefficientContainer/Container"]
+margin_left = 455.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(-2.00)"
+
+[node name="HSlider" type="HSlider" parent="Container/DragCoefficientContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = -5.0
+max_value = 5.0
+step = 0.5
+value = -2.0
+tick_count = 21
+ticks_on_borders = true
+
+[node name="TractionCoefficientContainer" type="HBoxContainer" parent="Container"]
+margin_top = 258.0
+margin_right = 1056.0
+margin_bottom = 281.0
+
+[node name="Container" type="HBoxContainer" parent="Container/TractionCoefficientContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/TractionCoefficientContainer/Container"]
+margin_right = 100.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "traction"
+
+[node name="Value" type="Label" parent="Container/TractionCoefficientContainer/Container"]
+margin_left = 464.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(0.75)"
+
+[node name="HSlider" type="HSlider" parent="Container/TractionCoefficientContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.75
+tick_count = 21
+ticks_on_borders = true
+
+[node name="TractionDriftingCoefficientContainer" type="HBoxContainer" parent="Container"]
+margin_top = 301.0
+margin_right = 1056.0
+margin_bottom = 324.0
+
+[node name="Container" type="HBoxContainer" parent="Container/TractionDriftingCoefficientContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/TractionDriftingCoefficientContainer/Container"]
+margin_right = 198.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "traction drifting"
+
+[node name="Value" type="Label" parent="Container/TractionDriftingCoefficientContainer/Container"]
+margin_left = 463.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(0.10)"
+
+[node name="HSlider" type="HSlider" parent="Container/TractionDriftingCoefficientContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.1
+tick_count = 21
+ticks_on_borders = true
+
+[node name="MaxSteeringAngleContainer" type="HBoxContainer" parent="Container"]
+margin_top = 344.0
+margin_right = 1056.0
+margin_bottom = 367.0
+
+[node name="Container" type="HBoxContainer" parent="Container/MaxSteeringAngleContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/MaxSteeringAngleContainer/Container"]
+margin_right = 241.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 7 )
+text = "max steering angle"
+
+[node name="Value" type="Label" parent="Container/MaxSteeringAngleContainer/Container"]
+margin_left = 486.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(15)"
+
+[node name="HSlider" type="HSlider" parent="Container/MaxSteeringAngleContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 45.0
+step = 5.0
+value = 15.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="GravitySteeringCoefficientContainer" type="HBoxContainer" parent="Container"]
+margin_top = 387.0
+margin_right = 1056.0
+margin_bottom = 410.0
+
+[node name="Container" type="HBoxContainer" parent="Container/GravitySteeringCoefficientContainer"]
+margin_right = 526.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Container/GravitySteeringCoefficientContainer/Container"]
+margin_right = 202.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 8 )
+text = "gravity steering"
+
+[node name="Value" type="Label" parent="Container/GravitySteeringCoefficientContainer/Container"]
+margin_left = 462.0
+margin_top = 2.0
+margin_right = 526.0
+margin_bottom = 21.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 9 )
+text = "(0.20)"
+
+[node name="HSlider" type="HSlider" parent="Container/GravitySteeringCoefficientContainer"]
+margin_left = 530.0
+margin_right = 1056.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.2
+tick_count = 21
+ticks_on_borders = true
+
+[connection signal="value_changed" from="Container/EnginePowerContainer/HSlider" to="." method="_on_engine_power_value_changed"]
+[connection signal="value_changed" from="Container/BrakingPowerContainer/HSlider" to="." method="_on_braking_power_value_changed"]
+[connection signal="value_changed" from="Container/MaxSpeedReverseContainer/HSlider" to="." method="_on_max_speed_reverse_value_changed"]
+[connection signal="value_changed" from="Container/MinSpeedDriftingContainer/HSlider" to="." method="_on_min_speed_drifting_value_changed"]
+[connection signal="value_changed" from="Container/FrictionCoefficientContainer/HSlider" to="." method="_on_friction_value_changed"]
+[connection signal="value_changed" from="Container/DragCoefficientContainer/HSlider" to="." method="_on_drag_value_changed"]
+[connection signal="value_changed" from="Container/TractionCoefficientContainer/HSlider" to="." method="_on_traction_value_changed"]
+[connection signal="value_changed" from="Container/TractionDriftingCoefficientContainer/HSlider" to="." method="_on_traction_drifting_value_changed"]
+[connection signal="value_changed" from="Container/MaxSteeringAngleContainer/HSlider" to="." method="_on_max_steering_angle_value_changed"]
+[connection signal="value_changed" from="Container/GravitySteeringCoefficientContainer/HSlider" to="." method="_on_gravity_steering_value_changed"]

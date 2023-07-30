@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://circuits/grand_stand_covered.tres" type="ArrayMesh" id=1]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 1, 1.16618, 0.02, 0.833692, 1.14598, -0.834859, 0.833692, 1.18628, -0.148735, 0, 1.16618, 0.02, 1, 1.12624, 0.02, 1, 1.10626, -1, 0.16621, 1.14598, -0.834859, 0.16621, 1.18628, -0.148735, 0, 1.12624, 0.02, 0, 1.10626, -1, 1, 0, -6.85453e-05, 1, 0, -1, 0, 0, -6.85453e-05, 0, 0, -1 )
+
+[node name="GrandStandCovered" type="StaticBody"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+
+[node name="Collision" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

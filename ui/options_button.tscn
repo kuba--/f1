@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/icons/options_l.png" type="Texture" id=1]
+[ext_resource path="res://assets/icons/options_d.png" type="Texture" id=2]
+[ext_resource path="res://ui/options_button.gd" type="Script" id=3]
+[ext_resource path="res://ui/options_popup.tscn" type="PackedScene" id=4]
+
+[node name="OptionsButton" type="TextureButton"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1016.0
+margin_bottom = -536.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="OptionsPopup" parent="." instance=ExtResource( 4 )]
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

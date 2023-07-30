@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://circuits/rail_double.tres" type="ArrayMesh" id=1]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( -3.03203e-14, 0, -0.957322, -3.03203e-14, 0.28, -0.957322, 0.019998, 0.0499922, -1, 0.019998, 0, -0.957322, -3.03203e-14, 0, -0.042776, 0.019998, 0.28, -0.957322, 0.019998, 0.259992, -1, -3.03203e-14, 0.28, -0.042776, 0.05, 0.0499922, -1, 0.019998, 0, -0.042776, 0.019998, 0.0499922, 0, 0.05, 0.259992, -1, 0.019998, 0.28, -0.042776, 0.019998, 0.259992, 0, 0.05, 0.0499922, 0, 0.05, 0.259992, 0 )
+
+[node name="RailDouble" type="StaticBody"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+mesh = ExtResource( 1 )
+
+[node name="Collision" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

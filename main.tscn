@@ -1,0 +1,329 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/audio/slow_rain.mp3" type="AudioStream" id=1]
+[ext_resource path="res://ui/sound_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://main.gd" type="Script" id=3]
+[ext_resource path="res://ui/box_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/options_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=10]
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.964844, 0.946378, 0.946378, 0.392157 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 512, 512 )
+modulate_color = Color( 1, 1, 1, 0.196078 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 15.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=15]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=16]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=17]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=18]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=19]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=20]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=21]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=22]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=23]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=24]
+resource_local_to_scene = true
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="BackgroundColorPanel" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 14 )
+
+[node name="BackgroundTexturePanel" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0.196078 )
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 64.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel"]
+margin_left = 15.0
+margin_top = 2.0
+margin_right = 1058.0
+margin_bottom = 66.0
+custom_constants/separation = 282
+
+[node name="OptionsButton" parent="SettingsPanel/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="SoundButton" parent="SettingsPanel/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 979.0
+margin_right = 1043.0
+margin_bottom = 64.0
+size_flags_horizontal = 10
+
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -20.0
+autoplay = true
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -108.0
+margin_bottom = 108.0
+custom_constants/separation = 50
+
+[node name="CarContainer" type="HBoxContainer" parent="Container"]
+margin_right = 1080.0
+margin_bottom = 10.0
+custom_constants/separation = 80
+alignment = 1
+
+[node name="GreenButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
+margin_left = 400.0
+margin_right = 410.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 15 )
+
+[node name="OrangeButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
+margin_left = 490.0
+margin_right = 500.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 16 )
+
+[node name="RedButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
+margin_left = 580.0
+margin_right = 590.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 17 )
+
+[node name="WhiteButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
+margin_left = 670.0
+margin_right = 680.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 18 )
+
+[node name="CircuitContainer" type="HBoxContainer" parent="Container"]
+margin_top = 60.0
+margin_right = 1080.0
+margin_bottom = 70.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="ChinaButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 385.0
+margin_right = 395.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 19 )
+
+[node name="PolandButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 445.0
+margin_right = 455.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 20 )
+
+[node name="MexicoButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 505.0
+margin_right = 515.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 21 )
+
+[node name="BahrainButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 565.0
+margin_right = 575.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 22 )
+
+[node name="AustraliaButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 625.0
+margin_right = 635.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 23 )
+
+[node name="ItalyButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
+margin_left = 685.0
+margin_right = 695.0
+margin_bottom = 10.0
+custom_styles/panel = SubResource( 24 )
+
+[connection signal="on_pressed" from="Container/CarContainer/GreenButton" to="." method="_on_race_car_button_pressed" binds= [ 0 ]]
+[connection signal="on_pressed" from="Container/CarContainer/OrangeButton" to="." method="_on_race_car_button_pressed" binds= [ 1 ]]
+[connection signal="on_pressed" from="Container/CarContainer/RedButton" to="." method="_on_race_car_button_pressed" binds= [ 2 ]]
+[connection signal="on_pressed" from="Container/CarContainer/WhiteButton" to="." method="_on_race_car_button_pressed" binds= [ 3 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/ChinaButton" to="." method="_on_circuit_button_pressed" binds= [ 0 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/PolandButton" to="." method="_on_circuit_button_pressed" binds= [ 1 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/MexicoButton" to="." method="_on_circuit_button_pressed" binds= [ 2 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/BahrainButton" to="." method="_on_circuit_button_pressed" binds= [ 3 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/AustraliaButton" to="." method="_on_circuit_button_pressed" binds= [ 4 ]]
+[connection signal="on_pressed" from="Container/CircuitContainer/ItalyButton" to="." method="_on_circuit_button_pressed" binds= [ 5 ]]

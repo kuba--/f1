@@ -1,0 +1,381 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://assets/materials/grass.material" type="Material" id=1]
+[ext_resource path="res://circuits/road_corner_large_sand.tscn" type="PackedScene" id=2]
+[ext_resource path="res://circuits/road_straight_long.tscn" type="PackedScene" id=3]
+[ext_resource path="res://circuits/grand_stand_covered_round.tscn" type="PackedScene" id=4]
+[ext_resource path="res://circuits/fence_curved.tscn" type="PackedScene" id=5]
+[ext_resource path="res://circuits/grand_stand_covered.tscn" type="PackedScene" id=6]
+[ext_resource path="res://circuits/overhead_round_colored.tscn" type="PackedScene" id=7]
+[ext_resource path="res://circuits/light_post.tscn" type="PackedScene" id=8]
+[ext_resource path="res://circuits/road_start.tscn" type="PackedScene" id=9]
+[ext_resource path="res://circuits/china_circuit.gd" type="Script" id=10]
+[ext_resource path="res://circuits/road_corner_large_border.tscn" type="PackedScene" id=11]
+[ext_resource path="res://cameras/chase_camera.tscn" type="PackedScene" id=12]
+[ext_resource path="res://circuits/road_straight.tscn" type="PackedScene" id=13]
+[ext_resource path="res://circuits/road_curved.tscn" type="PackedScene" id=14]
+[ext_resource path="res://circuits/pits_office.tscn" type="PackedScene" id=15]
+[ext_resource path="res://circuits/barrier_wall.tscn" type="PackedScene" id=16]
+[ext_resource path="res://circuits/pits_office_roof.tscn" type="PackedScene" id=17]
+[ext_resource path="res://cameras/zoom_camera.tscn" type="PackedScene" id=19]
+[ext_resource path="res://ui/circuit_control.tscn" type="PackedScene" id=20]
+
+[sub_resource type="ProceduralSky" id=4]
+resource_local_to_scene = true
+sky_top_color = Color( 0.4, 0.380392, 0.301961, 1 )
+sky_horizon_color = Color( 0.905882, 0.780392, 0.568627, 1 )
+sky_curve = 0.335892
+ground_bottom_color = Color( 0.152941, 0.14902, 0.141176, 1 )
+ground_horizon_color = Color( 0.792157, 0.713726, 0.509804, 1 )
+ground_curve = 0.017411
+sun_color = Color( 0.862745, 0.780392, 0.603922, 1 )
+sun_latitude = 5.0
+sun_longitude = 121.0
+sun_energy = 3.0
+
+[sub_resource type="Environment" id=2]
+resource_local_to_scene = true
+background_mode = 2
+background_sky = SubResource( 4 )
+background_energy = 1.5
+fog_enabled = true
+fog_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+tonemap_white = 7.99
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 200, 200 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( 100, 0, 100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
+
+[node name="ChinaCircuit" type="Spatial"]
+script = ExtResource( 10 )
+
+[node name="CircuitControl" parent="." instance=ExtResource( 20 )]
+
+[node name="ZoomCamera" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 17.347, 35, 35 )
+current = true
+
+[node name="ChaseCamera" parent="." instance=ExtResource( 12 )]
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="Mesh" type="MeshInstance" parent="Ground"]
+mesh = SubResource( 1 )
+
+[node name="Collision" type="CollisionShape" parent="Ground"]
+shape = SubResource( 3 )
+
+[node name="P1" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 1.23 )
+
+[node name="P2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 3.73 )
+
+[node name="P3" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 6.23 )
+
+[node name="P4" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 8.73 )
+
+[node name="RoadStart" parent="." instance=ExtResource( 9 )]
+
+[node name="RoadCurved1" parent="." instance=ExtResource( 14 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -10 )
+
+[node name="RoadCurved2" parent="." instance=ExtResource( 14 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -2.5, 0.01, -20 )
+
+[node name="RoadCornerLargeSand1" parent="." instance=ExtResource( 2 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -5, 0.01, -30 )
+
+[node name="RoadStraightLong1" parent="." instance=ExtResource( 3 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 5, 0.01, -40 )
+
+[node name="RoadStraightLong2" parent="." instance=ExtResource( 3 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 15, 0.01, -40 )
+
+[node name="RoadStraightLong3" parent="." instance=ExtResource( 3 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 25, 0.01, -40 )
+
+[node name="RoadCornerLargeBorder1" parent="." instance=ExtResource( 11 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 35, 0.01, -40 )
+
+[node name="RoadCornerLargeBorder2" parent="." instance=ExtResource( 11 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 45, 0.01, -30 )
+
+[node name="RoadCornerLargeBorder3" parent="." instance=ExtResource( 11 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 25, 0.01, -15 )
+
+[node name="RoadStraight1" parent="." instance=ExtResource( 13 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 25, 0.01, -10 )
+
+[node name="BarrierWall1" parent="." instance=ExtResource( 16 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 24.3845, 0, -15 )
+
+[node name="BarrierWall2" parent="." instance=ExtResource( 16 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 30, 0, -15 )
+
+[node name="RoadCornerLargeBorder4" parent="." instance=ExtResource( 11 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 35, 0.01, 0 )
+
+[node name="RoadCornerLargeBorder5" parent="." instance=ExtResource( 11 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 35, 0.01, -5 )
+
+[node name="RoadCornerLargeBorder6" parent="." instance=ExtResource( 11 )]
+transform = Transform( -5, 0, 4.37114e-07, 0, 5, 0, -4.37114e-07, 0, -5, 45, 0.01, 5 )
+
+[node name="RoadCurved3" parent="." instance=ExtResource( 14 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 35, 0.01, 15 )
+
+[node name="OverheadRoundColored" parent="." instance=ExtResource( 7 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 25, 0, 20 )
+
+[node name="RoadCurved4" parent="." instance=ExtResource( 14 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 25, 0.01, 17.5 )
+
+[node name="RoadStraight2" parent="." instance=ExtResource( 13 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 15, 0.01, 20 )
+
+[node name="RoadCornerLargeSand2" parent="." instance=ExtResource( 2 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 10, 0.01, 20 )
+
+[node name="PitsOfficeRoof1" parent="." instance=ExtResource( 17 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 10 )
+
+[node name="PitsOfficeRoof2" parent="." instance=ExtResource( 17 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 5 )
+
+[node name="PitsOffice1" parent="." instance=ExtResource( 15 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 0 )
+
+[node name="PitsOffice2" parent="." instance=ExtResource( 15 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -5 )
+
+[node name="PitsOffice3" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.0043631, 0, 5, 0, 5, 0, -5, 0, 0.0043631, -5, 0, -10 )
+
+[node name="PitsOfficeRoof3" parent="." instance=ExtResource( 17 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -15 )
+
+[node name="PitsOfficeRoof4" parent="." instance=ExtResource( 17 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -20 )
+
+[node name="GrandStandCovered1" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, -43 )
+
+[node name="GrandStandCovered2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 5, 0, -43 )
+
+[node name="GrandStandCovered3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 10, 0, -43 )
+
+[node name="GrandStandCovered4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 15, 0, -43 )
+
+[node name="GrandStandCovered5" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 20, 0, -43 )
+
+[node name="GrandStandCovered6" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 25, 0, -43 )
+
+[node name="GrandStandCovered7" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -43 )
+
+[node name="GrandStandCovered8" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 35, 0, -43 )
+
+[node name="GrandStandCovered9" parent="." instance=ExtResource( 6 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 40, 0, -43 )
+
+[node name="GrandStandCoveredRound1" parent="." instance=ExtResource( 4 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 45, 0, -43 )
+
+[node name="GrandStandCovered10" parent="." instance=ExtResource( 6 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 48.183, 0, -39.817 )
+
+[node name="GrandStandCovered11" parent="." instance=ExtResource( 6 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 48.183, 0, -34.817 )
+
+[node name="GrandStandCovered12" parent="." instance=ExtResource( 6 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 48.183, 0, -29.817 )
+
+[node name="GrandStandCovered13" parent="." instance=ExtResource( 6 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 48.183, 0, -24.817 )
+
+[node name="GrandStandCovered14" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, -19.817 )
+
+[node name="GrandStandCovered15" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, -14.817 )
+
+[node name="GrandStandCovered16" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, -9.817 )
+
+[node name="GrandStandCovered17" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, -4.817 )
+
+[node name="GrandStandCovered18" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, 0.184 )
+
+[node name="GrandStandCovered19" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, 5.184 )
+
+[node name="GrandStandCovered20" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, 10.184 )
+
+[node name="GrandStandCovered21" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0, 0, -5, 0, 5, 0, 5, 0, 0, 48.183, 0, 15.184 )
+
+[node name="GrandStandCoveredRound2" parent="." instance=ExtResource( 4 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 48.183, 0, 20.186 )
+
+[node name="GrandStandCovered22" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 44.9995, 0, 23.3689 )
+
+[node name="GrandStandCovered23" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 40, 0, 23.369 )
+
+[node name="GrandStandCovered24" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 35, 0, 23.369 )
+
+[node name="GrandStandCovered25" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 30, 0, 23.369 )
+
+[node name="GrandStandCovered26" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 25, 0, 23.369 )
+
+[node name="GrandStandCovered27" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 20, 0, 23.369 )
+
+[node name="GrandStandCovered28" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 15, 0, 23.369 )
+
+[node name="GrandStandCovered29" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 10, 0, 23.369 )
+
+[node name="GrandStandCovered30" parent="." instance=ExtResource( 6 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 5, 0, 23.369 )
+
+[node name="LightPost1" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 10 )
+
+[node name="LightPost2" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 0 )
+
+[node name="LightPost3" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, -10 )
+
+[node name="LightPost4" parent="." instance=ExtResource( 8 )]
+transform = Transform( -0.868241, 0, -4.92404, 0, 5, 0, 4.92404, 0, -0.868241, 5, 0, -25 )
+
+[node name="LightPost5" parent="." instance=ExtResource( 8 )]
+transform = Transform( -4.33013, 0, -2.5, 0, 5, 0, 2.5, 0, -4.33013, 10, 0, -30 )
+
+[node name="LightPost6" parent="." instance=ExtResource( 8 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 20, 0, -30 )
+
+[node name="LightPost7" parent="." instance=ExtResource( 8 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 30, 0, -30 )
+
+[node name="LightPost8" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 35, 0, -30 )
+
+[node name="LightPost9" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 20, 0, -12.5 )
+
+[node name="LightPost10" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 35, 0, -12.5 )
+
+[node name="LightPost11" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 35, 0, 5 )
+
+[node name="LightPost12" parent="." instance=ExtResource( 8 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 20, 0, 10 )
+
+[node name="LightPost13" parent="." instance=ExtResource( 8 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 15 )
+
+[node name="FenceCurved1" parent="." instance=ExtResource( 5 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0, 0, 26.68 )
+
+[node name="FenceCurved2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -5, 0, 26.68 )
+
+[node name="FenceCurved3" parent="." instance=ExtResource( 5 )]
+transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -10, 0, 26.68 )
+
+[node name="FenceCurved4" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 26.68 )
+
+[node name="FenceCurved5" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 21.68 )
+
+[node name="FenceCurved6" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 16.68 )
+
+[node name="FenceCurved7" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 11.68 )
+
+[node name="FenceCurved8" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 6.68 )
+
+[node name="FenceCurved9" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, 1.68 )
+
+[node name="FenceCurved10" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -3.32 )
+
+[node name="FenceCurved11" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -8.32 )
+
+[node name="FenceCurved12" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -13.32 )
+
+[node name="FenceCurved13" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -18.32 )
+
+[node name="FenceCurved14" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -23.32 )
+
+[node name="FenceCurved15" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -28.32 )
+
+[node name="FenceCurved16" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -33.32 )
+
+[node name="FenceCurved17" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -15, 0, -38.32 )
+
+[node name="FenceCurved18" parent="." instance=ExtResource( 5 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -15, 0, -43.32 )
+
+[node name="FenceCurved19" parent="." instance=ExtResource( 5 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -43.32 )
+
+[node name="FenceCurved20" parent="." instance=ExtResource( 5 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -5, 0, -43.32 )
+
+[connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]
+[connection signal="body_entered" from="RoadCurved1" to="." method="_on_race_car_entered" binds= [ 1 ]]
+[connection signal="body_entered" from="RoadCurved2" to="." method="_on_race_car_entered" binds= [ 2 ]]
+[connection signal="body_entered" from="RoadCornerLargeSand1" to="." method="_on_race_car_entered" binds= [ 3 ]]
+[connection signal="body_entered" from="RoadStraightLong1" to="." method="_on_race_car_entered" binds= [ 4 ]]
+[connection signal="body_entered" from="RoadStraightLong2" to="." method="_on_race_car_entered" binds= [ 5 ]]
+[connection signal="body_entered" from="RoadStraightLong3" to="." method="_on_race_car_entered" binds= [ 6 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder1" to="." method="_on_race_car_entered" binds= [ 7 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder2" to="." method="_on_race_car_entered" binds= [ 8 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder3" to="." method="_on_race_car_entered" binds= [ 9 ]]
+[connection signal="body_entered" from="RoadStraight1" to="." method="_on_race_car_entered" binds= [ 10 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder4" to="." method="_on_race_car_entered" binds= [ 11 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder5" to="." method="_on_race_car_entered" binds= [ 12 ]]
+[connection signal="body_entered" from="RoadCornerLargeBorder6" to="." method="_on_race_car_entered" binds= [ 13 ]]
+[connection signal="body_entered" from="RoadCurved3" to="." method="_on_race_car_entered" binds= [ 14 ]]
+[connection signal="body_entered" from="RoadCurved4" to="." method="_on_race_car_entered" binds= [ 15 ]]
+[connection signal="body_entered" from="RoadStraight2" to="." method="_on_race_car_entered" binds= [ 16 ]]
+[connection signal="body_entered" from="RoadCornerLargeSand2" to="." method="_on_race_car_entered" binds= [ 17 ]]

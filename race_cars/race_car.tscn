@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://race_cars/body_white.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://race_cars/wheel_front_left.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://race_cars/wheel_back_right.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://race_cars/wheel_back_left.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://race_cars/wheel_front_right.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://race_cars/race_car.gd" type="Script" id=7]
+
+[sub_resource type="BoxShape" id=1]
+resource_local_to_scene = true
+extents = Vector3( 0.276808, 0.15103, 0.660866 )
+
+[sub_resource type="CylinderShape" id=2]
+resource_local_to_scene = true
+height = 0.731129
+radius = 0.175
+
+[sub_resource type="CylinderShape" id=3]
+resource_local_to_scene = true
+height = 0.731
+radius = 0.175
+
+[node name="RaceCar" type="KinematicBody"]
+script = ExtResource( 7 )
+
+[node name="Car" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="BodyMesh" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.308, 0.048, 0.66 )
+mesh = ExtResource( 1 )
+skeleton = NodePath("")
+
+[node name="WheelFrontLeftMesh" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.205, 0.118, 0.328 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("")
+
+[node name="WheelFrontRightMesh" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205, 0.118, 0.328 )
+mesh = ExtResource( 5 )
+skeleton = NodePath("")
+
+[node name="WheelBackLeftMesh" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.205, 0.118, -0.473 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("")
+
+[node name="WheelBackRightMesh" type="MeshInstance" parent="Car"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.205, 0.118, -0.473 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("")
+
+[node name="BodyCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0.03 )
+shape = SubResource( 1 )
+
+[node name="WheelFrontCollision" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.118, -0.327513 )
+shape = SubResource( 2 )
+
+[node name="WheelBackCollision" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.118, 0.472957 )
+shape = SubResource( 3 )
+
+[node name="FrontRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.328 )
+enabled = true
+cast_to = Vector3( 0, -0.25, 0 )
+
+[node name="BackRay" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.473 )
+enabled = true
+cast_to = Vector3( 0, -0.25, 0 )
+
+[node name="CameraPositions" type="Spatial" parent="."]
+
+[node name="Top" type="Position3D" parent="CameraPositions"]
+transform = Transform( 1, 0, 0, 0, 0.907345, 0.420387, 0, -0.420387, 0.907345, 0, 2, 2.5 )
+
+[node name="Back" type="Position3D" parent="CameraPositions"]
+transform = Transform( 1, 0, 0, 0, 0.951234, 0.308469, 0, -0.308469, 0.951234, 0, 1.028, 1.55 )
+
+[node name="Driver" type="Position3D" parent="CameraPositions"]
+transform = Transform( 1, 0, 0, 0, 0.957072, 0.28985, 0, -0.28985, 0.957072, 0, 0.452, 0.072 )
+
+[node name="Front" type="Position3D" parent="CameraPositions"]
+transform = Transform( -1, 2.53395e-08, -8.36699e-08, 0, 0.957072, 0.28985, 8.74228e-08, 0.28985, -0.957072, 0, 0.697, -1.29 )
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+visible = false
