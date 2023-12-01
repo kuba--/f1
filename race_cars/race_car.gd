@@ -62,6 +62,9 @@ onready var max_steering_rad: float = deg2rad(max_steering_angle)
 
 # car parts
 onready var body: MeshInstance = $Car/BodyMesh
+func set_body(mesh: Mesh):
+	self.body.set_mesh(mesh)
+
 onready var wheel_front_left: MeshInstance = $Car/WheelFrontLeftMesh
 onready var wheel_front_right: MeshInstance = $Car/WheelFrontRightMesh
 onready var front_ray: RayCast = $FrontRay
@@ -76,10 +79,51 @@ var _is_drifting: bool = false
 var _audio_stream_idx: int = ENGINE
 var _camera_position_idx: int = 0
 var _get_steering_angle: FuncRef = null
+var _get_path_direction: FuncRef = null
+
+# context behaviors
+const CTX_N_RAYS: int = 32
+const CTX_LOOK_DISTANCE: int = 5
+const CTX_BRAKE_DISTANCE: int = 10
+const CTX_COLLISION_MASK: int = 0b100 # 4 (3rd bit)
+onready var ctx_rays := $ContextRays
+var _ctx_paths := []
+func set_ctx_rays():
+	self._ctx_paths.resize(CTX_N_RAYS)
+	var angle: float = 2.0 * PI / CTX_N_RAYS
+	for i in CTX_N_RAYS:
+		var r := RayCast.new()
+		r.cast_to = Vector3.FORWARD * CTX_LOOK_DISTANCE
+		r.rotation.y = -angle * i
+		r.add_exception(self)
+		r.enabled = true
+		r.collision_mask |= CTX_COLLISION_MASK
+		self.ctx_rays.add_child(r)
+
+func set_ctx_paths():
+	assert(self._get_path_direction != null, "_get_path_direction is not set")
+	# go forward (-transform.basis.z) unless the circuit has a path.
+	var dir = self._get_path_direction.call_func(get_instance_id(), transform.origin, -transform.basis.z)
+	for i in CTX_N_RAYS:
+		var ray: RayCast = self.ctx_rays.get_child(i)
+		var d := -ray.global_transform.basis.z
+		# set interest
+		self._ctx_paths[i] = max(0, d.dot(dir))
+		if ray.is_colliding():
+			# set danger
+			var obj := ray.get_collider()
+			self._ctx_paths[i] = self._ctx_paths[i] * 0.725 if Global.race_car_registry.has(obj.get_instance_id()) else 0.0
+
+func _next_direction() -> Vector3:
+	var dir := Vector3.ZERO
+	for i in CTX_N_RAYS:
+		dir += -self.ctx_rays.get_child(i).global_transform.basis.z * self._ctx_paths[i]
+	return dir.normalized()
 
 
 # constructor
 func _init():
+	Global.race_car_registry[get_instance_id()] = true
 	self._get_steering_angle = funcref(self, "_get_gravity_steering_angle") \
 		if OS.has_touchscreen_ui_hint()  \
 		else funcref(self, "_get_action_steering_angle")
@@ -87,7 +131,9 @@ func _init():
 
 # called when the node enters the scene tree for the first time.
 func _ready():
-	self.body.set_mesh(Global.default_race_car_body if Global.default_race_car_body != null else Global.RACE_CAR_BODIES[0])
+	set_body(Global.default_race_car_body)
+	if self._get_path_direction != null:
+		set_ctx_rays()
 	play_engine_sound(ENGINE)
 
 func _get_action_steering_angle() -> float:
@@ -101,6 +147,24 @@ func _get_gravity_steering_angle() -> float:
 		strength = self.max_steering_rad * sign(strength)
 	return strength
 
+func _get_ctx_steering_angle() -> float:
+	set_ctx_paths()
+	var dir := _next_direction()
+	# find angle - how far dir vector is to the left (negative)
+	# or right (positive) of forward (-self.transform.basis.z) vector.
+	var v = -self.transform.basis.z.cross(dir)
+	var a = v.dot(self.transform.basis.y)
+	var steer_angle = a * self.max_steering_rad * 2.0
+	self._acceleration = -self.transform.basis.z * self.engine_power
+	# check forward ray
+	var ray = self.ctx_rays.get_child(0)
+	if ray.is_colliding():
+		var obj = ray.get_collider()
+		var d = transform.origin.distance_to(obj.transform.origin)
+		if (d < 0.25 * CTX_BRAKE_DISTANCE) or (not Global.race_car_registry.has(obj.get_instance_id()) and d < CTX_BRAKE_DISTANCE):
+			self._acceleration = -self.transform.basis.z * self.braking_power
+	return steer_angle
+
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_select"):
 		print_debug(global_translation)
@@ -112,8 +176,11 @@ func _input(event: InputEvent):
 		play_engine_sound(BRAKING)
 
 func _input_process():
-	self._steering_angle = self._get_steering_angle.call_func()
+	if self._get_path_direction != null:
+		self._steering_angle = _get_ctx_steering_angle()
+		return
 
+	self._steering_angle = self._get_steering_angle.call_func()
 	if Input.is_action_pressed("ui_up"):
 		self._acceleration = -self.transform.basis.z * self.engine_power
 	if Input.is_action_pressed("ui_down"):

@@ -10,7 +10,8 @@ const RACE_CAR_BODIES: Array = [
 	preload("res://race_cars/body_red.tres"),
 	preload("res://race_cars/body_white.tres")
 ]
-var default_race_car_body: ArrayMesh = null
+var default_race_car_body: ArrayMesh = RACE_CAR_BODIES[1]
+var race_car_registry: Dictionary = {}
 
 # race car physics
 var engine_power: float = 5.0

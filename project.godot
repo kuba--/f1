@@ -167,9 +167,15 @@ default_bus_layout=""
 
 Global="*res://global.gd"
 
+[compression]
+
+formats/zstd/compression_level=5
+
 [display]
 
 window/size/width=1080
+window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -216,6 +222,10 @@ ui_down={
  ]
 }
 
+[memory]
+
+limits/command_queue/multithreading_queue_size_kb=512
+
 [physics]
 
 2d/physics_engine="GodotPhysics"
@@ -225,5 +235,11 @@ ui_down={
 
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
+quality/reflections/high_quality_ggx.mobile=true
+gles3/shaders/max_simultaneous_compiles.mobile=2
+gles3/shaders/max_simultaneous_compiles.web=2
 gles3/shaders/shader_cache_size_mb.mobile=256
+gles3/shaders/shader_cache_size_mb.web=256
+quality/lightmapping/use_bicubic_sampling.mobile=true
+quality/depth/hdr.mobile=true
 environment/default_environment="res://default_env.tres"

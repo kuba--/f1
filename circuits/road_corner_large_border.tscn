@@ -27,6 +27,7 @@ mesh = ExtResource( 2 )
 shape = SubResource( 5 )
 
 [node name="Border" type="StaticBody" parent="."]
+collision_layer = 5
 
 [node name="Mesh" type="MeshInstance" parent="Border"]
 mesh = ExtResource( 3 )
@@ -37,6 +38,7 @@ transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="BorderInner" type="StaticBody" parent="."]
+collision_layer = 5
 
 [node name="Mesh" type="MeshInstance" parent="BorderInner"]
 mesh = ExtResource( 1 )

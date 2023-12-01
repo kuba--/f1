@@ -88,5 +88,7 @@ transform = Transform( 1, 0, 0, 0, 0.957072, 0.28985, 0, -0.28985, 0.957072, 0, 
 [node name="Front" type="Position3D" parent="CameraPositions"]
 transform = Transform( -1, 2.53395e-08, -8.36699e-08, 0, 0.957072, 0.28985, 8.74228e-08, 0.28985, -0.957072, 0, 0.697, -1.29 )
 
+[node name="ContextRays" type="Spatial" parent="."]
+
 [node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
 visible = false

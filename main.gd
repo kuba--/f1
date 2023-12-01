@@ -34,6 +34,8 @@ var selected_cicruit_idx = null
 onready var root := get_tree()
 
 func _ready():
+	Global.race_car_registry.clear()
+
 	$Container/CarContainer/GreenButton.init(ICON_RACE_CAR_GREEN)
 	$Container/CarContainer/OrangeButton.init(ICON_RACE_CAR_ORANGE)
 	$Container/CarContainer/RedButton.init(ICON_RACE_CAR_RED)
