@@ -88,7 +88,7 @@ func _set_circuit_buttons_disabled():
 func _try_start():
 	if self.selected_race_car_idx == null or self.selected_cicruit_idx == null:
 		return
-	Global.default_race_car_body = Global.RACE_CAR_BODIES[selected_race_car_idx]
+	Global.my_race_car_body = Global.RACE_CAR_BODIES[selected_race_car_idx]
 
 	var circuit = Global.CIRCUITS[selected_cicruit_idx]
 	if circuit == null:

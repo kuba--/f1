@@ -9,7 +9,7 @@ onready var camera_positions := $CameraPositions
 onready var camera_positions_count: int = camera_positions.get_child_count()
 
 func init_camera_position(idx: int = 0) -> Position3D:
-	self._camera_position_idx = (idx % camera_positions_count)
+	self._camera_position_idx = wrapi(idx, 0, self.camera_positions_count)
 	var pos: Position3D = self.camera_positions.get_child(self._camera_position_idx)
 	emit_signal("camera_position_changed", pos)
 	return pos
@@ -81,6 +81,7 @@ var _camera_position_idx: int = 0
 var _get_steering_angle: FuncRef = null
 var _get_path_direction: FuncRef = null
 
+
 # context behaviors
 const CTX_N_RAYS: int = 32
 const CTX_LOOK_DISTANCE: int = 5
@@ -90,14 +91,14 @@ onready var ctx_rays := $ContextRays
 var _ctx_paths := []
 func set_ctx_rays():
 	self._ctx_paths.resize(CTX_N_RAYS)
-	var angle: float = 2.0 * PI / CTX_N_RAYS
+	var angle: float = TAU / CTX_N_RAYS # 2.0 * PI / CTX_N_RAYS
 	for i in CTX_N_RAYS:
 		var r := RayCast.new()
 		r.cast_to = Vector3.FORWARD * CTX_LOOK_DISTANCE
 		r.rotation.y = -angle * i
-		r.add_exception(self)
 		r.enabled = true
 		r.collision_mask |= CTX_COLLISION_MASK
+		r.add_exception(self)
 		self.ctx_rays.add_child(r)
 
 func set_ctx_paths():
@@ -131,7 +132,7 @@ func _init():
 
 # called when the node enters the scene tree for the first time.
 func _ready():
-	set_body(Global.default_race_car_body)
+	set_body(Global.my_race_car_body)
 	if self._get_path_direction != null:
 		set_ctx_rays()
 	play_engine_sound(ENGINE)

@@ -28,8 +28,8 @@ func _ready():
 #		car.body.set_mesh(Global.RACE_CAR_BODIES[i])
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
-		if race_car_id == 0:
-			race_car_id = car.get_instance_id()
+		if my_race_car_id == 0:
+			my_race_car_id = car.get_instance_id()
 
 #	race_car_position = $P3
 #	race_car_position2 = $P2

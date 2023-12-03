@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://race_cars/body_white.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://race_cars/wheel_front_left.tres" type="ArrayMesh" id=2]
 [ext_resource path="res://race_cars/wheel_back_right.tres" type="ArrayMesh" id=3]
 [ext_resource path="res://race_cars/wheel_back_left.tres" type="ArrayMesh" id=4]
 [ext_resource path="res://race_cars/wheel_front_right.tres" type="ArrayMesh" id=5]
+[ext_resource path="res://assets/fonts/Formula1Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://race_cars/race_car.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=4]
+outline_size = 1
+extra_spacing_char = 1
+font_data = ExtResource( 6 )
 
 [sub_resource type="BoxShape" id=1]
 resource_local_to_scene = true
@@ -23,6 +29,11 @@ radius = 0.175
 
 [node name="RaceCar" type="KinematicBody"]
 script = ExtResource( 7 )
+
+[node name="TopLabel" type="Label3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
+visible = false
+font = SubResource( 4 )
 
 [node name="Car" type="Spatial" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
