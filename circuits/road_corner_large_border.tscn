@@ -24,6 +24,7 @@ collision_layer = 2
 mesh = ExtResource( 2 )
 
 [node name="RoadCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0795708, 0, 0 )
 shape = SubResource( 5 )
 
 [node name="Border" type="StaticBody" parent="."]

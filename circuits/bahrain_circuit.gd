@@ -16,10 +16,11 @@ func _init():
 
 func _ready():
 	var pos = [$P1, $P2, $P3, $P4]
-	for i in range(4):
+	var n: int = len(pos)
+	for i in range(n):
 		var car = RaceCar.instance()
 		car.get_path_direction = funcref(self, "get_path_direction")
-		car.engine_power = 5.0
+		# car.engine_power = 5.0
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
 		if my_race_car_id == 0:
@@ -29,9 +30,9 @@ func _ready():
 	zoom_camera = $ZoomCamera
 	chase_camera = $ChaseCamera
 	road_start = $RoadStart
-	._circuit_ready()
-	for i in range(4):
-		race_cars[i]["car"].body.set_mesh(Global.RACE_CAR_BODIES[i])
+	_circuit_ready()
+	for i in range(n):
+		race_cars[i].car.body.set_mesh(Global.RACE_CAR_BODIES[i])
 
 
 
@@ -54,7 +55,5 @@ func get_path_direction(id: int, pos: Vector3, default: Vector3) -> Vector3:
 		return default
 
 	assert(path != null and path_follow != null, "path is null")
-	var offset: float = path.curve.get_closest_offset(pos)
-
-	path_follow.offset = offset
+	path_follow.offset = path.curve.get_closest_offset(pos)
 	return path_follow.transform.basis.z

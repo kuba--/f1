@@ -114,7 +114,7 @@ func set_ctx_paths():
 		if ray.is_colliding():
 			# set danger
 			var obj := ray.get_collider()
-			self._ctx_paths[i] = self._ctx_paths[i] * 0.725 if Global.race_car_registry.has(obj.get_instance_id()) else 0.0
+			self._ctx_paths[i] = self._ctx_paths[i] * 0.85 if Global.race_car_registry.has(obj.get_instance_id()) else 0.0
 
 func _next_direction() -> Vector3:
 	var dir := Vector3.ZERO
@@ -163,7 +163,7 @@ func _get_ctx_steering_angle() -> float:
 	if ray.is_colliding():
 		var obj = ray.get_collider()
 		var d = transform.origin.distance_to(obj.transform.origin)
-		if (d < 0.25 * CTX_BRAKE_DISTANCE) or (not Global.race_car_registry.has(obj.get_instance_id()) and d < CTX_BRAKE_DISTANCE):
+		if (not Global.race_car_registry.has(obj.get_instance_id()) and d < CTX_BRAKE_DISTANCE) or (d < 0.1 * CTX_BRAKE_DISTANCE):
 			self._acceleration = -self.transform.basis.z * self.braking_power
 	return steer_angle
 

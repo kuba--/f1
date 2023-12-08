@@ -38,7 +38,7 @@ func _circuit_ready():
 		car["car"].call_deferred("set_physics_process", false)
 		add_child(car["car"])
 
-	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]]["car"]
+	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car
 	err = my_race_car.connect("camera_position_changed", self.chase_camera, "_on_camera_position_changed")
 	assert(err == OK, "camera_position_changed error %d" % err)
 
@@ -70,7 +70,8 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 	if not self.started:
 		return
 
-	print_debug(car.get_instance_id(), " ", road_idx, " V=", car._velocity.length())
+	if self.race_cars_idx[car.get_instance_id()] == 0:
+		print_debug(car.get_instance_id(), " ", road_idx, " V=", car._velocity.length())
 
 	var stats: Stats = self.race_cars[self.race_cars_idx[car.get_instance_id()]].stats
 	stats.set_time_elapsed(road_idx, time_elapsed)

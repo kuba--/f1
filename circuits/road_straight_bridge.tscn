@@ -4,7 +4,7 @@
 
 [sub_resource type="ConvexPolygonShape" id=1]
 resource_local_to_scene = true
-points = PoolVector3Array( 0, 0.52, -1, 0, 0.52, 0, 1, 0.52, -1, 1, 0.52, 0 )
+points = PoolVector3Array( 0, 0.52, -0.9, 0, 0.52, 0, 0.9, 0.52, -0.9, 0.9, 0.52, 0 )
 
 [sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( 0, 0, -1, 0, 0, 0, 0, 0.499996, -1, 1, 0, -1, 0, 0.499996, 0, 1, 0, 0, 0.082, 0.5, -1, 1, 0.499996, -1, 0.082, 0.5, 0, 1, 0.499996, 0, 0.918, 0.5, -1, 0.918, 0.5, 0 )
