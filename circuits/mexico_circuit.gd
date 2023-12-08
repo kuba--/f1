@@ -8,7 +8,7 @@ export(int) var LAPS_COUNT = 4
 export(float) var PENALTY = 5.0 # penalty in seconds
 
 func _init():
-	road_start_index = self.ROAD_START_INDEX
+	road_start_idx = self.ROAD_START_INDEX
 	roads_count = self.ROADS_COUNT
 	laps_count = self.LAPS_COUNT
 	penalty = self.PENALTY

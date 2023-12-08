@@ -16,7 +16,7 @@ var race_cars_idx: Dictionary = {
 var time_elapsed: float = 0.0
 var started: bool = false
 
-var road_start_index: int = 0
+var road_start_idx: int = 0
 var roads_count: int = 0
 var laps_count: int = 0
 var penalty: float = 0.0 # penalty in seconds
@@ -74,7 +74,7 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 
 	var stats: Stats = self.race_cars[self.race_cars_idx[car.get_instance_id()]].stats
 	stats.set_time_elapsed(road_idx, time_elapsed)
-	if road_idx == self.road_start_index and car.get_instance_id() == self.my_race_car_id:
+	if road_idx == self.road_start_idx and car.get_instance_id() == self.my_race_car_id:
 		var l: int = stats.lap_idx() - 1
 		if l < 0:
 			return

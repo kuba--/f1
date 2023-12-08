@@ -8,15 +8,10 @@ export(int) var LAPS_COUNT = 4
 export(float) var PENALTY = 5.0 # penalty in seconds
 
 func _init():
-	road_start_index = self.ROAD_START_INDEX
+	road_start_idx = self.ROAD_START_INDEX
 	roads_count = self.ROADS_COUNT
 	laps_count = self.LAPS_COUNT
 	penalty = self.PENALTY
-#	print_debug("race_car.id: ", race_car.get_instance_id())
-#	race_car2 = RaceCar.instance()
-#	race_car2._get_path_direction = funcref(self, "get_path_direction")
-#	race_car.engine_power = 5.2
-
 
 
 func _ready():
@@ -25,14 +20,11 @@ func _ready():
 		var car = RaceCar.instance()
 		car._get_path_direction = funcref(self, "get_path_direction")
 		car.engine_power = 5.0
-#		car.body.set_mesh(Global.RACE_CAR_BODIES[i])
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
 		if my_race_car_id == 0:
 			my_race_car_id = car.get_instance_id()
 
-#	race_car_position = $P3
-#	race_car_position2 = $P2
 	circuit_control = $CircuitControl
 	zoom_camera = $ZoomCamera
 	chase_camera = $ChaseCamera
@@ -40,7 +32,6 @@ func _ready():
 	._circuit_ready()
 	for i in range(4):
 		race_cars[i]["car"].body.set_mesh(Global.RACE_CAR_BODIES[i])
-#	race_car2.body.set_mesh(Global.RACE_CAR_BODIES[2])
 
 
 
