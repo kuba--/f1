@@ -78,8 +78,9 @@ var _steering_angle: float = 0.0
 var _is_drifting: bool = false
 var _audio_stream_idx: int = ENGINE
 var _camera_position_idx: int = 0
-var _get_steering_angle: FuncRef = null
-var _get_path_direction: FuncRef = null
+
+var get_steering_angle: FuncRef = null
+var get_path_direction: FuncRef = null
 
 
 # context behaviors
@@ -102,9 +103,9 @@ func set_ctx_rays():
 		self.ctx_rays.add_child(r)
 
 func set_ctx_paths():
-	assert(self._get_path_direction != null, "_get_path_direction is not set")
+	assert(self.get_path_direction != null, "get_path_direction is not set")
 	# go forward (-transform.basis.z) unless the circuit has a path.
-	var dir = self._get_path_direction.call_func(get_instance_id(), transform.origin, -transform.basis.z)
+	var dir = self.get_path_direction.call_func(get_instance_id(), transform.origin, -transform.basis.z)
 	for i in CTX_N_RAYS:
 		var ray: RayCast = self.ctx_rays.get_child(i)
 		var d := -ray.global_transform.basis.z
@@ -125,7 +126,7 @@ func _next_direction() -> Vector3:
 # constructor
 func _init():
 	Global.race_car_registry[get_instance_id()] = true
-	self._get_steering_angle = funcref(self, "_get_gravity_steering_angle") \
+	self.get_steering_angle = funcref(self, "_get_gravity_steering_angle") \
 		if OS.has_touchscreen_ui_hint()  \
 		else funcref(self, "_get_action_steering_angle")
 	return self
@@ -133,7 +134,7 @@ func _init():
 # called when the node enters the scene tree for the first time.
 func _ready():
 	set_body(Global.my_race_car_body)
-	if self._get_path_direction != null:
+	if self.get_path_direction != null:
 		set_ctx_rays()
 	play_engine_sound(ENGINE)
 
@@ -177,11 +178,11 @@ func _input(event: InputEvent):
 		play_engine_sound(BRAKING)
 
 func _input_process():
-	if self._get_path_direction != null:
+	if self.get_path_direction != null:
 		self._steering_angle = _get_ctx_steering_angle()
 		return
 
-	self._steering_angle = self._get_steering_angle.call_func()
+	self._steering_angle = self.get_steering_angle.call_func()
 	if Input.is_action_pressed("ui_up"):
 		self._acceleration = -self.transform.basis.z * self.engine_power
 	if Input.is_action_pressed("ui_down"):

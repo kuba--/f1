@@ -11,7 +11,7 @@ var time_elapsed: float = 0.000
 var started: bool = false
 
 func _init():
-	race_car._get_path_direction = funcref(self, "get_path_direction")
+	race_car.get_path_direction = funcref(self, "get_path_direction")
 	pass
 
 func _ready():

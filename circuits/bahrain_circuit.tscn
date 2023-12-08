@@ -63,6 +63,8 @@ _data = {
 
 [node name="BahrainCircuit" type="Spatial"]
 script = ExtResource( 18 )
+LAPS_COUNT = null
+PENALTY = null
 
 [node name="CircuitControl" parent="." instance=ExtResource( 3 )]
 

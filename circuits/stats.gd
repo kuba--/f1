@@ -6,7 +6,7 @@ var _laps_count: int = 0
 var _penalty: float
 
 # current road index
-var _road_idx: int = 0
+var _road_idx: int = 0 setget ,current_road_idx
 
 # next road index
 var _next_road_idx: int = 1
@@ -47,6 +47,9 @@ func set_time_elapsed(road_idx: int, time_elapsed: float):
 	self._laps[self._lap_idx] = time_elapsed
 	if self._road_idx == 0:
 		self._lap_idx += 1
+
+func current_road_idx() -> int:
+	return _road_idx
 
 
 func lap_idx() -> int:

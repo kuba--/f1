@@ -18,7 +18,7 @@ func _ready():
 	var pos = [$P1, $P2, $P3, $P4]
 	for i in range(4):
 		var car = RaceCar.instance()
-		car._get_path_direction = funcref(self, "get_path_direction")
+		car.get_path_direction = funcref(self, "get_path_direction")
 		car.engine_power = 5.0
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
@@ -40,7 +40,7 @@ func get_path_direction(id: int, pos: Vector3, default: Vector3) -> Vector3:
 	var path_follow: PathFollow = null
 
 	var stats: Stats = race_cars[race_cars_idx[id]].stats
-	var idx = stats._road_idx
+	var idx = stats.current_road_idx()
 	if  idx >= 0 and idx < 8:
 		path = $Path0_7
 		path_follow = $Path0_7/PathFollow
