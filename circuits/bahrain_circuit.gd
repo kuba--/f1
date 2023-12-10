@@ -20,7 +20,6 @@ func _ready():
 	for i in range(n):
 		var car = RaceCar.instance()
 		car.get_path_direction = funcref(self, "get_path_direction")
-		# car.engine_power = 5.0
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
 		if my_race_car_id == 0:

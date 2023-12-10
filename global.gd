@@ -15,7 +15,7 @@ var race_car_registry: Dictionary = {}
 
 # race car physics
 var engine_power: float = 5.0
-var braking_power: float = -9.0
+var braking_power: float = -10.0
 var max_speed_reverse: float = 5.0
 var min_speed_drifting: float = 9.0
 var friction_coefficient: float = -2.0

@@ -32,11 +32,11 @@ func _circuit_ready():
 	var err := self.road_start.connect("lights_out", self, "_on_lights_out", [], CONNECT_ONESHOT)
 	assert(err == OK, "road_start.connect lights_out error %d" % err)
 
-	for car in self.race_cars:
-		car["stats"] = Stats.new(self.roads_count, self.laps_count, self.penalty)
-		car["car"].translate(car["position"].translation)
-		car["car"].call_deferred("set_physics_process", false)
-		add_child(car["car"])
+	for rc in self.race_cars:
+		rc["stats"] = Stats.new(self.roads_count, self.laps_count, self.penalty)
+		rc["car"].translate(rc["position"].translation)
+		rc["car"].call_deferred("set_physics_process", false)
+		add_child(rc.car)
 
 	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car
 	err = my_race_car.connect("camera_position_changed", self.chase_camera, "_on_camera_position_changed")
@@ -57,8 +57,8 @@ func _process(delta: float):
 func _on_lights_out():
 	self.time_elapsed = 0.0
 	self.started = true
-	for car in self.race_cars:
-		car["car"].set_physics_process(true)
+	for rc in self.race_cars:
+		rc.car.set_physics_process(true)
 
 
 func _on_zoom_camera_position_set():

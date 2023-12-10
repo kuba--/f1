@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/materials/grass.material" type="Material" id=1]
 [ext_resource path="res://circuits/road_corner_large_sand.tscn" type="PackedScene" id=2]
@@ -48,6 +48,12 @@ size = Vector2( 200, 200 )
 
 [sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( 100, 0, 100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.41949, -1.52588e-05, -5.62532, 0, 0, 0, 0, 0, 0, -3.53378, -0.000106812, -30.1633, 0, 0, 0, 0, 0, 0, 0.909912, -0.00012207, -34.7419, 0, 0, 0, 0, 0, 0, 5.95576, -0.000137329, -36.6444, 0, 0, 0, 0, 0, 0, 35.1555, -0.000137329, -37.9679, 0, 0, 0, 0, 0, 0, 40.3668, -0.00012207, -35.1555, 0, 0, 0, 0, 0, 0, 40.5322, -9.15527e-05, -24.8984, 0, 0, 0, 0, 0, 0, 27.7935, -6.10352e-05, -18.2809, 0, 0, 0, 0, 0, 0, 29.3652, -1.52588e-05, -5.7076, 0, 0, 0, 0, 0, 0, 42.9311, 1.52588e-05, 4.79769, 0, 0, 0, 0, 0, 0, 35.6518, 4.57764e-05, 12.656, 0, 0, 0, 0, 0, 0, 15.303, 6.10352e-05, 17.4537, 0, 0, 0, 0, 0, 0, 9.76082, 6.10352e-05, 17.1228, 0, 0, 0, 0, 0, 0, 5.84708, 6.10352e-05, 15.0737, 0, 0, 0, 0, 0, 0, 3.39147, 4.57764e-05, 10.7534, 0, 0, 0, 0, 0, 0, 2.41949, -1.52588e-05, -5.62532 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
 
 [node name="ChinaCircuit" type="Spatial"]
 script = ExtResource( 10 )
@@ -360,6 +366,13 @@ transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -43.32 )
 
 [node name="FenceCurved20" parent="." instance=ExtResource( 5 )]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -5, 0, -43.32 )
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 5 )
+
+[node name="PathFollow" type="PathFollow" parent="Path"]
+transform = Transform( -0.971808, -8.54887e-07, -0.235774, 0, 1, -3.62587e-06, 0.235774, -3.52365e-06, -0.971808, 2.41949, -1.52588e-05, -5.62532 )
+rotation_mode = 4
 
 [connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]
 [connection signal="body_entered" from="RoadCurved1" to="." method="_on_race_car_entered" binds= [ 1 ]]

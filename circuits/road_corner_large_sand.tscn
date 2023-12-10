@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://circuits/road_corner_large_sand.tres" type="ArrayMesh" id=1]
 [ext_resource path="res://circuits/road_corner_large_sand_inner.tres" type="ArrayMesh" id=2]
@@ -9,12 +9,6 @@
 [sub_resource type="ConvexPolygonShape" id=6]
 resource_local_to_scene = true
 points = PoolVector3Array( 2, 0.02, -1.918, 1.749, 0.02, -1.902, 2, 0.02, -1.082, 1.503, 0.02, -1.853, 0.918, 0.02, 0, 1.266, 0.02, -1.773, 0.082, 0.02, 0, 0.098, 0.02, -0.251, 1.041, 0.02, -1.662, 0.147, 0.02, -0.497, 0.832, 0.02, -1.522, 0.227, 0.02, -0.734, 0.644, 0.02, -1.356, 0.338, 0.02, -0.959, 0.478, 0.02, -1.168 )
-
-[sub_resource type="ConvexPolygonShape" id=7]
-points = PoolVector3Array( 2, 8.01483e-32, -2.53, 1.66963, 6.96825e-32, -2.50845, 2, 8.01483e-32, -2.00003, 0.267931, 1.07325e-32, -1.00001, 0.782301, 3.13501e-32, -1.58695, 1.34496, 5.93973e-32, -2.44382, -2.74181e-05, 0, 0, 0.0170605, 6.82547e-34, -0.261271, -0.53, 0, 0, 0.0680766, 2.73019e-33, -0.517838, 0.15203, 6.09585e-33, -0.765488, -0.0072093, 1.65616e-32, -1.54039, 0.210971, 2.34733e-32, -1.78903, 0.413054, 1.65616e-32, -1.2177, 0.585667, 2.34733e-32, -1.41433, 1.03169, 4.94729e-32, -2.33758, -0.508454, 6.82547e-34, -0.330366, -0.443818, 2.73019e-33, -0.655036, -0.337575, 6.09585e-33, -0.968314, -0.191214, 1.07325e-32, -1.265, 0.459612, 3.13501e-32, -2.00721, 0.735, 4.00741e-32, -2.19121 )
-
-[sub_resource type="ConvexPolygonShape" id=8]
-points = PoolVector3Array( 2, 8.01483e-32, -1, 1.86942, 6.96825e-32, -0.991484, 2, 8.01483e-32, -0.470047, 1.71388, 3.13501e-32, -0.372944, 1.54601, 2.73019e-33, -0.121672, 1.59289, 1.07325e-32, -0.235023, 1.74109, 5.93973e-32, -0.965936, 1.52995, 0, 0, 1, 0, 0, 1.56568, 6.09585e-33, -0.179914, 1.53397, 6.82547e-34, -0.0613743, 1.07606, 6.09585e-33, -0.382733, 1.13391, 1.07325e-32, -0.5, 1.20664, 1.65616e-32, -0.608849, 1.29287, 2.34733e-32, -0.707126, 1.61727, 4.94729e-32, -0.923943, 1.00852, 6.82547e-34, -0.130579, 1.39115, 3.13501e-32, -0.793363, 1.5, 4.00741e-32, -0.866092, 1.03406, 2.73019e-33, -0.258908 )
 
 [sub_resource type="ConcavePolygonShape" id=4]
 resource_local_to_scene = true
@@ -35,29 +29,32 @@ mesh = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026033, 0, -0.0728876 )
 shape = SubResource( 6 )
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="Sand" type="StaticBody" parent="."]
 collision_layer = 4
 collision_mask = 0
 
-[node name="SandMesh" type="MeshInstance" parent="StaticBody"]
+[node name="Mesh" type="MeshInstance" parent="Sand"]
 mesh = ExtResource( 1 )
 skeleton = NodePath("../..")
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 7 )
+[node name="Collision" type="CollisionShape" parent="Sand"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0.25, 0, 0.25 )
+shape = SubResource( 4 )
 
-[node name="StaticBody2" type="StaticBody" parent="."]
+[node name="SandInner" type="StaticBody" parent="."]
 collision_layer = 4
 collision_mask = 0
 
-[node name="SandInnerMesh" type="MeshInstance" parent="StaticBody2"]
+[node name="Mesh" type="MeshInstance" parent="SandInner"]
 mesh = ExtResource( 2 )
 skeleton = NodePath("../..")
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-shape = SubResource( 8 )
+[node name="Collision" type="CollisionShape" parent="SandInner"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -0.25, 0, -0.25 )
+shape = SubResource( 5 )
 
 [node name="Wall" type="StaticBody" parent="."]
+collision_layer = 5
 
 [node name="Mesh" type="MeshInstance" parent="Wall"]
 mesh = ExtResource( 4 )
@@ -68,6 +65,7 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="WallInner" type="StaticBody" parent="."]
+collision_layer = 5
 
 [node name="Mesh" type="MeshInstance" parent="WallInner"]
 mesh = ExtResource( 5 )

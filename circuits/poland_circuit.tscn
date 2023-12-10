@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://circuits/poland_circuit.gd" type="Script" id=1]
 [ext_resource path="res://ui/circuit_control.tscn" type="PackedScene" id=2]
@@ -39,8 +39,8 @@ size = Vector2( 200, 200 )
 [sub_resource type="ConvexPolygonShape" id=4]
 points = PoolVector3Array( 100, 0, 100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
 
-[sub_resource type="ConvexPolygonShape" id=13]
-points = PoolVector3Array( -2.5, 2.55, 40, -47.5, 2.55, 40, -47.5, 2.55, 35, -2.5, 2.55, 35 )
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 2, 0.001, 15 )
 
 [sub_resource type="PlaneMesh" id=5]
 resource_local_to_scene = true
@@ -102,6 +102,24 @@ emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
 
+[sub_resource type="Curve3D" id=14]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.33932, 0, -5.40645, 0, 0, 0, 0, 0, 0, 2.42234, 0, -29.4087, 0, 0, 0, 0, 0, 0, 4.1798, 0, -34.704, 0, 0, 0, 0, 0, 0, 9.48766, 0, -37.8111, 0, 0, 0, 0, 0, 0, 19.5856, 0, -37.5521, 0, 0, 0, 0, 0, 0, 30.0718, 0, -40.0766, 0, 0, 0, 0, 0, 0, 35.7681, 0, -40.2061, 0, 0, 0, 0, 0, 0, 41.0112, 0, -37.099 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=15]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 42.8884, 0, -31.8559, 0, 0, 0, 0, 0, 0, 44.9388, 0, -23.1588, 0, 0, 0, 0, 0, 0, 45.0259, 0, 47.13 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=16]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 45.8069, 0, 50.744, 0, 0, 0, 0, 0, 0, 52.9294, 0, 55.0048, 0, 0, 0, 0, 0, 0, 59.9917, 0, 47.8315, 0, 0, 0, 0, 0, 0, 59.416, 0, 27.9137, 0, 0, 0, 0, 0, 0, 58.0955, 0, 7.83385, 0, 0, 0, 0, 0, 0, 50.7669, 0, 0.877176, 0, 0, 0, 0, 0, 0, 36.9223, 0, 2.34816, 0, 0, 0, 0, 0, 0, 33.3746, 0, 9.70309, 0, 0, 0, 0, 0, 0, 33.4179, 0, 19.3943, 0, 0, 0, 0, 0, 0, 33.4179, 0, 30.2536, 0, 0, 0, 0, 0, 0, 25.8466, 0, 37.522, 0, 0, 0, 0, 0, 0, 10.4445, 0, 35.9645, 0, 0, 0, 0, 0, 0, 2.70022, 0, 10.7847 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
 [node name="PolandCircuit" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -125,6 +143,7 @@ shadow_color = Color( 0.321569, 0.286275, 0.286275, 1 )
 
 [node name="Ground" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2686, 0, 0 )
+visible = false
 
 [node name="Mesh" type="MeshInstance" parent="Ground"]
 mesh = SubResource( 3 )
@@ -147,7 +166,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 8.73 )
 [node name="Bridge" type="StaticBody" parent="."]
 
 [node name="Collision" type="CollisionShape" parent="Bridge"]
-shape = SubResource( 13 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2.55, 12.5 )
+shape = SubResource( 17 )
 
 [node name="RoadStart" parent="." instance=ExtResource( 6 )]
 
@@ -221,7 +241,7 @@ transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 50, 0.0
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0.01, 10 )
 
 [node name="RoadStraightLong9" parent="." instance=ExtResource( 7 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0.01, 20 )
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 30.0339, -0.0207541, 19.9941 )
 
 [node name="RoadStraightLong10" parent="." instance=ExtResource( 7 )]
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0.01, 30 )
@@ -330,6 +350,30 @@ transform = Transform( 20, 0, 0, 0, 5, 0, 0, 0, 5, -2.5, 0, -70.42 )
 
 [node name="OverheadRoundColored" parent="." instance=ExtResource( 19 )]
 transform = Transform( -2.18557e-07, 0, 30, 0, 5, 0, -5, 0, -1.31134e-06, 24.9508, 0, 42 )
+
+[node name="Path0_7" type="Path" parent="."]
+curve = SubResource( 14 )
+
+[node name="PathFollow" type="PathFollow" parent="Path0_7"]
+transform = Transform( -0.999994, 0, 0.00345841, 0, 1, 0, -0.00345841, 0, -0.999994, 2.33932, 0, -5.40645 )
+rotation_mode = 4
+loop = false
+
+[node name="Path8_14" type="Path" parent="."]
+curve = SubResource( 15 )
+
+[node name="PathFollow" type="PathFollow" parent="Path8_14"]
+transform = Transform( 0.973314, 0, 0.229476, 0, 1, 0, -0.229476, 0, 0.973314, 42.8884, 0, -31.8559 )
+rotation_mode = 4
+loop = false
+
+[node name="Path15_30" type="Path" parent="."]
+curve = SubResource( 16 )
+
+[node name="PathFollow" type="PathFollow" parent="Path15_30"]
+transform = Transform( 0.51337, 0, 0.858168, 0, 1, 0, -0.858168, 0, 0.51337, 45.8069, 0, 50.744 )
+rotation_mode = 4
+loop = false
 
 [connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]
 [connection signal="body_entered" from="RoadStraightLong1" to="." method="_on_race_car_entered" binds= [ 1 ]]

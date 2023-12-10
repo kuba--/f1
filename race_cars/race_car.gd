@@ -85,8 +85,9 @@ var get_path_direction: FuncRef = null
 
 # context behaviors
 const CTX_N_RAYS: int = 32
-const CTX_LOOK_DISTANCE: int = 5
-const CTX_BRAKE_DISTANCE: int = 10
+const CTX_LOOK_DISTANCE: float = 10.0
+const CTX_BRAKE_DISTANCE: float = 10.0
+const CTX_BRAKE_CAR_DISTANCE: float = 0.1 * CTX_BRAKE_DISTANCE
 const CTX_COLLISION_MASK: int = 0b100 # 4 (3rd bit)
 onready var ctx_rays := $ContextRays
 var _ctx_paths := []
@@ -159,12 +160,14 @@ func _get_ctx_steering_angle() -> float:
 	var steer_angle = a * self.max_steering_rad * 2.0
 	self._acceleration = -self.transform.basis.z * self.engine_power
 	# check forward ray
-	var ray = self.ctx_rays.get_child(0)
+	var ray := self.ctx_rays.get_child(0)
 	if ray.is_colliding():
 		var obj = ray.get_collider()
+		var is_colliding_with_car := Global.race_car_registry.has(obj.get_instance_id())
 		var d = transform.origin.distance_to(obj.transform.origin)
-		if (not Global.race_car_registry.has(obj.get_instance_id()) and d < CTX_BRAKE_DISTANCE) or (d < 0.1 * CTX_BRAKE_DISTANCE):
+		if (not is_colliding_with_car and d < CTX_BRAKE_DISTANCE) or (d < CTX_BRAKE_CAR_DISTANCE):
 			self._acceleration = -self.transform.basis.z * self.braking_power
+
 	return steer_angle
 
 func _input(event: InputEvent):
