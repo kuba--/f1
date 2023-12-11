@@ -33,9 +33,9 @@ func _circuit_ready():
 	assert(err == OK, "road_start.connect lights_out error %d" % err)
 
 	for rc in self.race_cars:
-		rc["stats"] = Stats.new(self.roads_count, self.laps_count, self.penalty)
-		rc["car"].translate(rc["position"].translation)
-		rc["car"].call_deferred("set_physics_process", false)
+		rc.stats = Stats.new(self.roads_count, self.laps_count, self.penalty)
+		rc.car.translate(rc["position"].translation)
+		rc.car.call_deferred("set_physics_process", false)
 		add_child(rc.car)
 
 	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car

@@ -231,7 +231,7 @@ material/0 = ExtResource( 17 )
 curve = SubResource( 6 )
 
 [node name="PathFollow" type="PathFollow" parent="Path"]
-transform = Transform( -0.999954, -3.6207e-08, -0.00956092, 0, 1, -3.78698e-06, 0.00956092, -3.7868e-06, -0.999954, 2.66462, -1.52588e-05, -6.02128 )
+transform = Transform( -0.999954, -3.62069e-08, -0.00956092, 0, 1, -3.78697e-06, 0.00956092, -3.78679e-06, -0.999954, 2.66462, -1.52588e-05, -6.02128 )
 rotation_mode = 4
 
 [connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]

@@ -23,7 +23,7 @@ func _ready():
 		car.get_path_direction = funcref(self, "get_path_direction")
 		race_cars.append({"car": car, "position": pos[i], "stats": null})
 		race_cars_idx[car.get_instance_id()] = i
-		if my_race_car_id == 0:
+		if i == 3:
 			my_race_car_id = car.get_instance_id()
 
 	circuit_control = $CircuitControl

@@ -115,7 +115,7 @@ func set_ctx_paths():
 		if ray.is_colliding():
 			# set danger
 			var obj := ray.get_collider()
-			self._ctx_paths[i] = self._ctx_paths[i] * 0.85 if Global.race_car_registry.has(obj.get_instance_id()) else 0.0
+			self._ctx_paths[i] = self._ctx_paths[i] * 0.50 if Global.race_car_registry.has(obj.get_instance_id()) else 0.0
 
 func _next_direction() -> Vector3:
 	var dir := Vector3.ZERO
@@ -199,8 +199,7 @@ func _physics_process(delta: float):
 		_friction_process(delta)
 		_steering_process(delta)
 	self._acceleration.y = Global.default_gravity
-	self._velocity = move_and_slide_with_snap(self._velocity + self._acceleration * delta, \
-	-self.transform.basis.y, Vector3.UP, true)
+	self._velocity = move_and_slide_with_snap(self._velocity + self._acceleration * delta, -self.transform.basis.y, Vector3.UP, true)
 	_align_to_slope()
 
 
@@ -212,7 +211,6 @@ func _friction_process(delta: float):
 		# stop the car
 		self._velocity.x = 0.0
 		self._velocity.z = 0.0
-
 	var friction: Vector3 = self._velocity * self.friction_coefficient * delta
 	var drag: Vector3 = self._velocity * v * self.drag_coefficient * delta
 	self._acceleration += friction + drag
@@ -257,7 +255,6 @@ func _steering_process(delta: float):
 func _align_to_slope():
 	var is_front_colliding := self.front_ray.is_colliding()
 	var front_ray_normal := self.front_ray.get_collision_normal() if is_front_colliding else Vector3.UP
-
 	var is_back_colliding = self.back_ray.is_colliding()
 	var back_ray_normal := self.back_ray.get_collision_normal() if is_back_colliding else Vector3.UP
 

@@ -371,7 +371,7 @@ transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -5, 0, -43.32 )
 curve = SubResource( 5 )
 
 [node name="PathFollow" type="PathFollow" parent="Path"]
-transform = Transform( -0.971808, -8.54887e-07, -0.235774, 0, 1, -3.62587e-06, 0.235774, -3.52365e-06, -0.971808, 2.41949, -1.52588e-05, -5.62532 )
+transform = Transform( -0.971808, -8.54891e-07, -0.235774, 0, 1, -3.6259e-06, 0.235774, -3.52367e-06, -0.971808, 2.41949, -1.52588e-05, -5.62532 )
 rotation_mode = 4
 
 [connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]
