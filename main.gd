@@ -10,8 +10,6 @@ const ICON_POLAND: Texture = preload("res://assets/icons/poland-96.png")
 const ICON_CHINA: Texture = preload("res://assets/icons/china-96.png")
 const ICON_MEXICO: Texture = preload("res://assets/icons/mexico-96.png")
 const ICON_BAHRAIN: Texture = preload("res://assets/icons/bahrain-96.png")
-const ICON_AUSTRALIA: Texture = preload("res://assets/icons/australia-96.png")
-const ICON_ITALY: Texture = preload("res://assets/icons/italy-96.png")
 
 onready var race_car_buttons = [
 	$Container/CarContainer/GreenButton,
@@ -25,9 +23,7 @@ onready var circuit_buttons = [
 	$Container/CircuitContainer/ChinaButton,
 	$Container/CircuitContainer/PolandButton,
 	$Container/CircuitContainer/MexicoButton,
-	$Container/CircuitContainer/BahrainButton,
-	$Container/CircuitContainer/AustraliaButton,
-	$Container/CircuitContainer/ItalyButton
+	$Container/CircuitContainer/BahrainButton
 ]
 var selected_cicruit_idx = null
 
@@ -45,8 +41,6 @@ func _ready():
 	$Container/CircuitContainer/PolandButton.init(ICON_POLAND)
 	$Container/CircuitContainer/MexicoButton.init(ICON_MEXICO)
 	$Container/CircuitContainer/BahrainButton.init(ICON_BAHRAIN)
-	$Container/CircuitContainer/AustraliaButton.init(ICON_AUSTRALIA)
-	$Container/CircuitContainer/ItalyButton.init(ICON_ITALY)
 
 
 var _thread: Thread = Thread.new()

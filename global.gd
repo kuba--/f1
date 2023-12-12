@@ -30,17 +30,9 @@ const CIRCUITS: Array = [
 	"res://circuits/china_circuit.tscn",
 	"res://circuits/poland_circuit.tscn",
 	"res://circuits/mexico_circuit.tscn",
-	"res://circuits/bahrain_circuit.tscn",
-	null,
-	null,
-	null,
-	null
+	"res://circuits/bahrain_circuit.tscn"
 ]
 var CIRCUITS_CACHE: Array = [
-	null,
-	null,
-	null,
-	null,
 	null,
 	null,
 	null,

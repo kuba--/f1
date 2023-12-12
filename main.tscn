@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/audio/slow_rain.mp3" type="AudioStream" id=1]
 [ext_resource path="res://ui/sound_button.tscn" type="PackedScene" id=2]
@@ -156,38 +156,6 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=23]
-resource_local_to_scene = true
-content_margin_left = 5.0
-content_margin_right = 5.0
-content_margin_top = 5.0
-content_margin_bottom = 5.0
-bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=24]
-resource_local_to_scene = true
-content_margin_left = 5.0
-content_margin_right = 5.0
-content_margin_top = 5.0
-content_margin_bottom = 5.0
-bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -282,40 +250,28 @@ custom_constants/separation = 50
 alignment = 1
 
 [node name="ChinaButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 385.0
-margin_right = 395.0
+margin_left = 445.0
+margin_right = 455.0
 margin_bottom = 10.0
 custom_styles/panel = SubResource( 19 )
 
 [node name="PolandButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 445.0
-margin_right = 455.0
+margin_left = 505.0
+margin_right = 515.0
 margin_bottom = 10.0
 custom_styles/panel = SubResource( 20 )
 
 [node name="MexicoButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 505.0
-margin_right = 515.0
+margin_left = 565.0
+margin_right = 575.0
 margin_bottom = 10.0
 custom_styles/panel = SubResource( 21 )
 
 [node name="BahrainButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 565.0
-margin_right = 575.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 22 )
-
-[node name="AustraliaButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
 margin_left = 625.0
 margin_right = 635.0
 margin_bottom = 10.0
-custom_styles/panel = SubResource( 23 )
-
-[node name="ItalyButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 685.0
-margin_right = 695.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 24 )
+custom_styles/panel = SubResource( 22 )
 
 [connection signal="on_pressed" from="Container/CarContainer/GreenButton" to="." method="_on_race_car_button_pressed" binds= [ 0 ]]
 [connection signal="on_pressed" from="Container/CarContainer/OrangeButton" to="." method="_on_race_car_button_pressed" binds= [ 1 ]]
@@ -325,5 +281,3 @@ custom_styles/panel = SubResource( 24 )
 [connection signal="on_pressed" from="Container/CircuitContainer/PolandButton" to="." method="_on_circuit_button_pressed" binds= [ 1 ]]
 [connection signal="on_pressed" from="Container/CircuitContainer/MexicoButton" to="." method="_on_circuit_button_pressed" binds= [ 2 ]]
 [connection signal="on_pressed" from="Container/CircuitContainer/BahrainButton" to="." method="_on_circuit_button_pressed" binds= [ 3 ]]
-[connection signal="on_pressed" from="Container/CircuitContainer/AustraliaButton" to="." method="_on_circuit_button_pressed" binds= [ 4 ]]
-[connection signal="on_pressed" from="Container/CircuitContainer/ItalyButton" to="." method="_on_circuit_button_pressed" binds= [ 5 ]]
