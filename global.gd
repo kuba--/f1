@@ -3,6 +3,13 @@ extends Node
 # world physics
 var default_gravity: float = -(ProjectSettings.get_setting("physics/3d/default_gravity") as float)
 
+enum Mode {
+	TIME = 0,
+	RACING = 1,
+	MULTIPLAYER = 2
+}
+var GamePlayMode = null
+
 # race car bodies
 const RACE_CAR_BODIES: Array = [
 	preload("res://race_cars/body_green.tres"),
@@ -10,7 +17,7 @@ const RACE_CAR_BODIES: Array = [
 	preload("res://race_cars/body_red.tres"),
 	preload("res://race_cars/body_white.tres")
 ]
-var my_race_car_body: ArrayMesh = RACE_CAR_BODIES[1]
+var my_race_car_body: ArrayMesh = RACE_CAR_BODIES[0]
 var race_car_registry: Dictionary = {}
 
 # race car physics

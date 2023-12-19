@@ -134,7 +134,6 @@ func _init():
 
 # called when the node enters the scene tree for the first time.
 func _ready():
-	set_body(Global.my_race_car_body)
 	if self.get_path_direction != null:
 		set_ctx_rays()
 	play_engine_sound(ENGINE)
@@ -264,3 +263,8 @@ func _align_to_slope():
 		self.global_transform.basis.y = normal
 		self.global_transform.basis = self.global_transform.basis.orthonormalized()
 		self.global_transform = self.global_transform.interpolate_with(self.global_transform, self.align_interpolate_weight)
+
+
+func set_label(txt: String):
+	$TopLabel.text = txt
+	$TopLabel.visible = true
