@@ -15,24 +15,12 @@ func _init():
 
 
 func _ready():
-	var pos = [$P1, $P2, $P3, $P4]
-	var n: int = len(pos)
-	for i in range(n):
-		var car = RaceCar.instance()
-		car.get_path_direction = funcref(self, "get_path_direction")
-		race_cars.append({"car": car, "position": pos[i], "stats": null})
-		race_cars_idx[car.get_instance_id()] = i
-		if i == 3:
-			my_race_car_id = car.get_instance_id()
-
 	circuit_control = $CircuitControl
 	zoom_camera = $ZoomCamera
 	chase_camera = $ChaseCamera
 	road_start = $RoadStart
+	get_path_direction = funcref(self, "get_path_direction")
 	_circuit_ready()
-	for i in range(n):
-		race_cars[i].car.body.set_mesh(Global.RACE_CAR_BODIES[i])
-
 
 
 func get_path_direction(id: int, pos: Vector3, default: Vector3) -> Vector3:

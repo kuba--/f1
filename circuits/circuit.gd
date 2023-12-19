@@ -26,17 +26,47 @@ var zoom_camera: ZoomCamera = null
 var chase_camera: ChaseCamera = null
 var road_start: RoadStart = null
 
+var get_path_direction: FuncRef = null
+
 
 func _circuit_ready():
 	self.circuit_control.init(self.laps_count)
 	var err := self.road_start.connect("lights_out", self, "_on_lights_out", [], CONNECT_ONESHOT)
 	assert(err == OK, "road_start.connect lights_out error %d" % err)
 
-	for rc in self.race_cars:
-		rc.stats = Stats.new(self.roads_count, self.laps_count, self.penalty)
-		rc.car.translate(rc["position"].translation)
-		rc.car.call_deferred("set_physics_process", false)
-		add_child(rc.car)
+	match Global.GamePlayMode:
+		Global.Mode.TIME:
+			var pos = $P1
+			var car = RaceCar.instance()
+			self.my_race_car_id = car.get_instance_id()
+			self.race_cars.append({"car": car, "position": pos, "stats": Stats.new(self.roads_count, self.laps_count, self.penalty)})
+			self.race_cars_idx[car.get_instance_id()] = 0
+			car.get_path_direction = null
+			car.call_deferred("set_physics_process", false)
+			car.translate(pos.translation)
+			add_child(car)
+			car.body.set_mesh(Global.my_race_car_body)
+
+		Global.Mode.RACING:
+			var pos = [$P1, $P2, $P3, $P4]
+			for i in range(len(pos)):
+				var car = RaceCar.instance()
+				self.race_cars.append({"car": car, "position": pos[i], "stats": Stats.new(self.roads_count, self.laps_count, self.penalty)})
+				self.race_cars_idx[car.get_instance_id()] = i
+				car.call_deferred("set_physics_process", false)
+				car.translate(pos[i].translation)
+				if Global.RACE_CAR_BODIES[i].get_instance_id() == Global.my_race_car_body.get_instance_id():
+					self.my_race_car_id = car.get_instance_id()
+					car.get_path_direction = null
+					# car.set_label("FOO")
+				else:
+					car.get_path_direction = self.get_path_direction
+					car.set_label("PC" + str(i+1))
+				add_child(car)
+				car.body.set_mesh(Global.RACE_CAR_BODIES[i])
+		_:
+			print_debug("game play mode '", Global.GamePlayMode, "' not implemented, yet")
+			return
 
 	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car
 	err = my_race_car.connect("camera_position_changed", self.chase_camera, "_on_camera_position_changed")
@@ -70,7 +100,7 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 	if not self.started:
 		return
 
-	if self.race_cars_idx[car.get_instance_id()] == 0:
+	if car.get_instance_id() == self.my_race_car_id:
 		print_debug(car.get_instance_id(), " ", road_idx, " V=", car._velocity.length())
 
 	var stats: Stats = self.race_cars[self.race_cars_idx[car.get_instance_id()]].stats
@@ -87,4 +117,9 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 			self.started = false
 			t = stats.total()
 			self.circuit_control.set_time_elapsed(t[2])
+#	elif road_idx == self.road_start_idx:
+#		var l: int = stats.lap_idx() - 1
+#		if l < 0:
+#			return
+#		car.queue_free()
 
