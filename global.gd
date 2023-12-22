@@ -50,7 +50,7 @@ func my_race_car_body() -> ArrayMesh:
 
 # race car physics
 var engine_power: float = 5.0
-var pc_engine_power: float = 5.0
+var pc_engine_power: float = 4.5
 var braking_power: float = -10.0
 var max_speed_reverse: float = 5.0
 var min_speed_drifting: float = 8.0
