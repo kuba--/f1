@@ -172,7 +172,6 @@ default_bus_layout=""
 [autoload]
 
 Global="*res://global.gd"
-SceneSwitcher="*res://scene_switcher.gd"
 
 [compression]
 
