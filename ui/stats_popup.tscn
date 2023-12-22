@@ -1,0 +1,270 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/icons/mexico-96.png" type="Texture" id=1]
+[ext_resource path="res://ui/stats_popup.gd" type="Script" id=2]
+[ext_resource path="res://assets/icons/home_l.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/home_d.png" type="Texture" id=4]
+[ext_resource path="res://ui/sound_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/icons/race_car_red_small.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/icons/race_car_white_small.png" type="Texture" id=8]
+[ext_resource path="res://assets/icons/race_car_green_small.png" type="Texture" id=9]
+[ext_resource path="res://assets/icons/race_car_orange_small.png" type="Texture" id=10]
+[ext_resource path="res://assets/audio/slow_rain.mp3" type="AudioStream" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.964706, 0.945098, 0.945098, 0.392157 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+content_margin_left = 15.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0.321569, 0.34902, 0.411765, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=5]
+resource_local_to_scene = true
+size = 24
+extra_spacing_top = 3
+extra_spacing_bottom = 3
+extra_spacing_char = 3
+extra_spacing_space = 3
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+resource_local_to_scene = true
+size = 36
+outline_size = 1
+extra_spacing_top = 5
+extra_spacing_bottom = 5
+extra_spacing_char = 5
+font_data = ExtResource( 7 )
+
+[node name="StatsPopup" type="PopupDialog"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+
+[node name="BackgroundColorPanel" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -20.0
+autoplay = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SettingsPanel" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_right = 1080.0
+margin_bottom = 68.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/SettingsPanel"]
+margin_left = 15.0
+margin_top = 2.0
+margin_right = 1078.0
+margin_bottom = 66.0
+size_flags_horizontal = 5
+custom_constants/separation = 282
+alignment = 1
+
+[node name="HomeButton" type="TextureButton" parent="VBoxContainer/SettingsPanel/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_top = 7.0
+margin_right = 50.0
+margin_bottom = 57.0
+size_flags_vertical = 4
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/SettingsPanel/HBoxContainer"]
+visible = false
+margin_left = 460.0
+margin_right = 556.0
+margin_bottom = 96.0
+size_flags_horizontal = 14
+size_flags_vertical = 4
+texture = ExtResource( 1 )
+
+[node name="SoundButton" parent="VBoxContainer/SettingsPanel/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 999.0
+margin_right = 1063.0
+margin_bottom = 64.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="ResultsContainer" type="PanelContainer" parent="VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_top = 72.0
+margin_right = 1080.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ResultsContainer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1075.0
+margin_bottom = 523.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="P1Container" type="HBoxContainer" parent="VBoxContainer/ResultsContainer/VBoxContainer"]
+visible = false
+margin_top = 235.0
+margin_right = 1070.0
+margin_bottom = 282.0
+custom_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ResultsContainer/VBoxContainer/P1Container"]
+margin_right = 112.0
+margin_bottom = 96.0
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P1Container"]
+margin_top = 8.0
+margin_right = 530.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+valign = 1
+uppercase = true
+
+[node name="Total" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P1Container"]
+margin_left = 848.0
+margin_right = 1070.0
+margin_bottom = 47.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 3 )
+text = "000.000"
+align = 2
+valign = 1
+
+[node name="P2Container" type="HBoxContainer" parent="VBoxContainer/ResultsContainer/VBoxContainer"]
+visible = false
+margin_top = 89.0
+margin_right = 1070.0
+margin_bottom = 185.0
+custom_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ResultsContainer/VBoxContainer/P2Container"]
+margin_right = 112.0
+margin_bottom = 96.0
+texture = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P2Container"]
+margin_left = 122.0
+margin_top = 32.0
+margin_right = 591.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+valign = 1
+uppercase = true
+
+[node name="Total" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P2Container"]
+margin_left = 848.0
+margin_top = 24.0
+margin_right = 1070.0
+margin_bottom = 71.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 3 )
+text = "000.000"
+align = 2
+valign = 1
+
+[node name="P3Container" type="HBoxContainer" parent="VBoxContainer/ResultsContainer/VBoxContainer"]
+visible = false
+margin_top = 142.0
+margin_right = 1070.0
+margin_bottom = 238.0
+custom_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ResultsContainer/VBoxContainer/P3Container"]
+margin_right = 112.0
+margin_bottom = 96.0
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P3Container"]
+margin_left = 122.0
+margin_top = 32.0
+margin_right = 591.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+valign = 1
+uppercase = true
+
+[node name="Total" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P3Container"]
+margin_left = 848.0
+margin_top = 24.0
+margin_right = 1070.0
+margin_bottom = 71.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 3 )
+text = "000.000"
+align = 2
+valign = 1
+
+[node name="P4Container" type="HBoxContainer" parent="VBoxContainer/ResultsContainer/VBoxContainer"]
+visible = false
+margin_top = 195.0
+margin_right = 1070.0
+margin_bottom = 291.0
+custom_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/ResultsContainer/VBoxContainer/P4Container"]
+margin_right = 112.0
+margin_bottom = 96.0
+texture = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P4Container"]
+margin_left = 122.0
+margin_top = 32.0
+margin_right = 591.0
+margin_bottom = 63.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+valign = 1
+uppercase = true
+
+[node name="Total" type="Label" parent="VBoxContainer/ResultsContainer/VBoxContainer/P4Container"]
+margin_left = 848.0
+margin_top = 24.0
+margin_right = 1070.0
+margin_bottom = 71.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 3 )
+text = "000.000"
+align = 2
+valign = 1
+
+[connection signal="pressed" from="VBoxContainer/SettingsPanel/HBoxContainer/HomeButton" to="." method="_on_home_pressed"]

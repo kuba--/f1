@@ -370,7 +370,7 @@ loop = false
 curve = SubResource( 16 )
 
 [node name="PathFollow" type="PathFollow" parent="Path15_30"]
-transform = Transform( 0.51337, 0, 0.858168, 0, 1, 0, -0.858168, 0, 0.51337, 45.8069, 0, 50.744 )
+transform = Transform( 0.419225, 0, 0.907883, 0, 1, 0, -0.907883, 0, 0.419225, 45.8069, 0, 50.744 )
 rotation_mode = 4
 loop = false
 
