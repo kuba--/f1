@@ -4,10 +4,11 @@ extends Circuit
 const ROADS_COUNT: int = 27
 const ROAD_START_INDEX: int = 0
 
-export(int) var LAPS_COUNT = 4
+export(int) var LAPS_COUNT = Global.laps_count as int
 export(float) var PENALTY = 5.0 # penalty in seconds
 
 func _init():
+	icon = Global.ICON_BAHRAIN
 	road_start_idx = self.ROAD_START_INDEX
 	roads_count = self.ROADS_COUNT
 	laps_count = self.LAPS_COUNT

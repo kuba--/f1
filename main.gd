@@ -1,20 +1,6 @@
 class_name Main
 extends Control
 
-const ICON_RACE_CAR_GREEN: Texture = preload("res://assets/icons/race_car_green.png")
-const ICON_RACE_CAR_ORANGE: Texture = preload("res://assets/icons/race_car_orange.png")
-const ICON_RACE_CAR_RED: Texture = preload("res://assets/icons/race_car_red.png")
-const ICON_RACE_CAR_WHITE: Texture = preload("res://assets/icons/race_car_white.png")
-
-const ICON_POLAND: Texture = preload("res://assets/icons/poland-96.png")
-const ICON_CHINA: Texture = preload("res://assets/icons/china-96.png")
-const ICON_MEXICO: Texture = preload("res://assets/icons/mexico-96.png")
-const ICON_BAHRAIN: Texture = preload("res://assets/icons/bahrain-96.png")
-
-const ICON_MODE_TIME: Texture = preload("res://assets/icons/mode_time.png")
-const ICON_MODE_RACING: Texture = preload("res://assets/icons/mode_racing.png")
-const ICON_MODE_MULTIPLAYER: Texture = preload("res://assets/icons/mode_multiplayer.png")
-
 onready var race_car_buttons = [
 	$Container/CarContainer/GreenButton,
 	$Container/CarContainer/OrangeButton,
@@ -44,19 +30,19 @@ var loaded_curcuit_scene: PackedScene = null
 func _ready():
 	Global.race_car_registry.clear()
 
-	$Container/CarContainer/GreenButton.init(ICON_RACE_CAR_GREEN)
-	$Container/CarContainer/OrangeButton.init(ICON_RACE_CAR_ORANGE)
-	$Container/CarContainer/RedButton.init(ICON_RACE_CAR_RED)
-	$Container/CarContainer/WhiteButton.init(ICON_RACE_CAR_WHITE)
+	$Container/CarContainer/GreenButton.init(Global.ICON_RACE_CAR_GREEN)
+	$Container/CarContainer/OrangeButton.init(Global.ICON_RACE_CAR_ORANGE)
+	$Container/CarContainer/RedButton.init(Global.ICON_RACE_CAR_RED)
+	$Container/CarContainer/WhiteButton.init(Global.ICON_RACE_CAR_WHITE)
 
-	$Container/CircuitContainer/ChinaButton.init(ICON_CHINA)
-	$Container/CircuitContainer/PolandButton.init(ICON_POLAND)
-	$Container/CircuitContainer/MexicoButton.init(ICON_MEXICO)
-	$Container/CircuitContainer/BahrainButton.init(ICON_BAHRAIN)
+	$Container/CircuitContainer/ChinaButton.init(Global.ICON_CHINA)
+	$Container/CircuitContainer/PolandButton.init(Global.ICON_POLAND)
+	$Container/CircuitContainer/MexicoButton.init(Global.ICON_MEXICO)
+	$Container/CircuitContainer/BahrainButton.init(Global.ICON_BAHRAIN)
 
-	$Container/ModeContainer/TimeButton.init(ICON_MODE_TIME)
-	$Container/ModeContainer/RacingButton.init(ICON_MODE_RACING)
-	$Container/ModeContainer/MultiplayerButton.init(ICON_MODE_MULTIPLAYER)
+	$Container/ModeContainer/TimeButton.init(Global.ICON_MODE_TIME)
+	$Container/ModeContainer/RacingButton.init(Global.ICON_MODE_RACING)
+	$Container/ModeContainer/MultiplayerButton.init(Global.ICON_MODE_MULTIPLAYER)
 
 
 func _on_race_car_button_pressed(selected: bool, idx: int):
@@ -94,7 +80,7 @@ func _on_mode_button_pressed(selected: bool, idx: int):
 		match idx:
 			Global.Mode.TIME, Global.Mode.RACING:
 				_set_mode_buttons_disabled()
-				Global.GamePlayMode = idx
+				Global.game_play_mode = idx
 #				self.root.call_deferred("change_scene_to", curcuit_scene)
 				var err := self.root.change_scene_to(self.loaded_curcuit_scene)
 				assert(err == OK, "node.change_scene_to error %d" % err)
@@ -114,7 +100,7 @@ func _set_mode_buttons_visible():
 func _try_load_circuit():
 	if self.selected_race_car_idx == null or self.selected_cicruit_idx == null:
 		return
-	Global.my_race_car_body = Global.RACE_CAR_BODIES[selected_race_car_idx]
+	Global.my_race_car_idx = selected_race_car_idx
 	var circuit = Global.CIRCUITS[selected_cicruit_idx]
 	if circuit == null:
 		return

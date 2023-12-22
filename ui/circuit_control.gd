@@ -41,3 +41,4 @@ func set_lap(lap_idx: int, lap_penalty: float, lap_time: float):
 func _on_home_pressed():
 	var err := get_tree().change_scene_to(Main)
 	assert(err == OK, "change_scene_to error %d" % err)
+

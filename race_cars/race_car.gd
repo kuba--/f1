@@ -46,6 +46,7 @@ func play_engine_sound(stream_idx: int):
 # car physics properties
 export var wheel_base: float = 0.801 ## distance between front/back wheels
 var engine_power: float = Global.engine_power
+var pc_engine_power: float = Global.pc_engine_power
 var braking_power: float = Global.braking_power
 var max_speed_reverse: float = Global.max_speed_reverse
 var min_speed_drifting: float = Global.min_speed_drifting
@@ -136,7 +137,8 @@ func _init():
 func _ready():
 	if self.get_path_direction != null:
 		set_ctx_rays()
-	play_engine_sound(ENGINE)
+	else:
+		play_engine_sound(ENGINE)
 
 func _get_action_steering_angle() -> float:
 	var strength: float = Input.get_action_strength("ui_left") - Input.get_action_strength("ui_right")
@@ -157,7 +159,7 @@ func _get_ctx_steering_angle() -> float:
 	var v = -self.transform.basis.z.cross(dir)
 	var a = v.dot(self.transform.basis.y)
 	var steer_angle = a * self.max_steering_rad * 2.0
-	self._acceleration = -self.transform.basis.z * self.engine_power
+	self._acceleration = -self.transform.basis.z * self.pc_engine_power
 	# check forward ray
 	var ray := self.ctx_rays.get_child(0)
 	if ray.is_colliding():
@@ -268,3 +270,6 @@ func _align_to_slope():
 func set_label(txt: String):
 	$TopLabel.text = txt
 	$TopLabel.visible = true
+
+func get_label() -> String:
+	return $TopLabel.text
