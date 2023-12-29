@@ -15,7 +15,7 @@ F1 is a car racing game made in [Godot](https://godotengine.org) v3.5. The idea 
 ... multiplayer mode
 
 ### Credits
-But I could not create this game without great free assets.
+I could not create this game without great free assets.
 - Game assets (like models, materials) downloaded from [https://kenney.nl](https://kenney.nl).
 - UI stuff (free icons, buttons, etc.) downloaded from [https://www.flaticon.com](https://www.flaticon.com).
 - Audio assets (sounds) are from [https://pixabay.com/](https://pixabay.com/)
