@@ -16,7 +16,7 @@ F1 is a car racing game made in [Godot](https://godotengine.org) v3.5. The idea 
 
 ### Demo
 Playable web demo (WebGL 1.0) is on _github pages_: [https://kuba--.github.io/f1/](https://kuba--.github.io/f1/).
-Android version (OpenGL ES 3.0) is available as _release draft_: [f1.apk](https://github.com/kuba--/f1/releases).
+Android version (OpenGL ES 3.0) is available as _release draft asset_: [f1.apk](https://github.com/kuba--/f1/releases).
 
 ### Credits
 I could not create this game without great free assets.
