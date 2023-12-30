@@ -42,7 +42,7 @@ func _ready():
 
 	$Container/ModeContainer/TimeButton.init(Global.ICON_MODE_TIME)
 	$Container/ModeContainer/RacingButton.init(Global.ICON_MODE_RACING)
-	$Container/ModeContainer/MultiplayerButton.init(Global.ICON_MODE_MULTIPLAYER)
+	$Container/ModeContainer/MultiplayerButton.init(Global.ICON_MODE_MULTIPLAYER, true)
 
 
 func _on_race_car_button_pressed(selected: bool, idx: int):
