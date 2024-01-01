@@ -67,7 +67,7 @@ func _circuit_ready():
 			car.body.set_mesh(Global.my_race_car_body())
 
 		Global.Mode.RACING:
-			var pos = [$P1, $P2, $P3, $P4]
+			var pos := [$P1, $P2, $P3, $P4]
 			for i in range(len(pos)):
 				var car = RaceCar.instance()
 				self.race_cars.append({
