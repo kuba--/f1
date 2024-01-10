@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/audio/slow_rain.mp3" type="AudioStream" id=1]
 [ext_resource path="res://ui/sound_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main.gd" type="Script" id=3]
 [ext_resource path="res://ui/box_button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/options_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=14]
@@ -27,6 +28,14 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="DynamicFont" id=26]
+size = 32
+extra_spacing_top = 3
+extra_spacing_bottom = 3
+extra_spacing_char = 3
+extra_spacing_space = 3
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=15]
 resource_local_to_scene = true
@@ -240,6 +249,18 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 64.0
 margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="SettingsPanel/HBoxContainer"]
+margin_left = 470.0
+margin_top = 12.0
+margin_right = 553.0
+margin_bottom = 51.0
+size_flags_horizontal = 14
+custom_fonts/font = SubResource( 26 )
+text = "ABC"
+align = 1
+valign = 1
+uppercase = true
 
 [node name="SoundButton" parent="SettingsPanel/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 979.0

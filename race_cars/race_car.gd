@@ -268,7 +268,7 @@ func _align_to_slope():
 
 
 func set_label(txt: String):
-	$TopLabel.text = txt
+	$TopLabel.text = txt.substr(0, 3)
 	$TopLabel.visible = true
 
 func get_label() -> String:
