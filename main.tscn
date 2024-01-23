@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/audio/slow_rain.mp3" type="AudioStream" id=1]
 [ext_resource path="res://ui/sound_button.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/box_button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/options_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/fonts/Formula1Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=14]
@@ -213,6 +214,11 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="DynamicFont" id=27]
+size = 18
+extra_spacing_char = 1
+font_data = ExtResource( 7 )
+
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -351,21 +357,50 @@ custom_constants/separation = 200
 alignment = 1
 
 [node name="TimeButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
-margin_right = 1080.0
+margin_left = 325.0
+margin_right = 335.0
 margin_bottom = 10.0
 custom_styles/panel = SubResource( 23 )
 
 [node name="RacingButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
-margin_top = 60.0
-margin_right = 1080.0
-margin_bottom = 70.0
+margin_left = 535.0
+margin_right = 545.0
+margin_bottom = 10.0
 custom_styles/panel = SubResource( 25 )
 
 [node name="MultiplayerButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
-margin_top = 120.0
-margin_right = 1080.0
-margin_bottom = 130.0
+margin_left = 745.0
+margin_right = 755.0
+margin_bottom = 10.0
 custom_styles/panel = SubResource( 24 )
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 10.0
+margin_top = 89.0
+margin_right = 672.0
+margin_bottom = 133.0
+custom_fonts/font = SubResource( 27 )
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 822.0
+margin_top = 83.0
+margin_right = 936.0
+margin_bottom = 133.0
+text = "SERVER"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 688.0
+margin_top = 85.0
+margin_right = 802.0
+margin_bottom = 135.0
+text = "JOIN"
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 949.0
+margin_top = 84.0
+margin_right = 1063.0
+margin_bottom = 134.0
+text = "CONNECT"
 
 [connection signal="on_pressed" from="Container/CarContainer/GreenButton" to="." method="_on_race_car_button_pressed" binds= [ 0 ]]
 [connection signal="on_pressed" from="Container/CarContainer/OrangeButton" to="." method="_on_race_car_button_pressed" binds= [ 1 ]]
@@ -378,3 +413,6 @@ custom_styles/panel = SubResource( 24 )
 [connection signal="on_pressed" from="Container/ModeContainer/TimeButton" to="." method="_on_mode_button_pressed" binds= [ 0 ]]
 [connection signal="on_pressed" from="Container/ModeContainer/RacingButton" to="." method="_on_mode_button_pressed" binds= [ 1 ]]
 [connection signal="on_pressed" from="Container/ModeContainer/MultiplayerButton" to="." method="_on_mode_button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="Button2" to="." method="_on_server_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_connect_pressed"]

@@ -92,6 +92,9 @@ var (
 )
 
 func main() {
+	if secret == "" {
+		secret = os.Getenv("HOLEPUNCHER_SECRET")
+	}
 	port := flag.Int("p", DefaultPort, "hole puncher running on UDP port")
 	flag.Usage = func() {
 		flag.PrintDefaults()
