@@ -26,6 +26,7 @@ var game_play_mode = null
 
 var race_car_registry: Dictionary = {}
 var my_race_car_idx: int = 0
+var my_unique_id: String = OS.get_unique_id()
 
 # race car icons
 const RACE_CAR_ICONS_SMALL: Array = [

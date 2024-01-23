@@ -82,7 +82,7 @@ func _circuit_ready():
 				if i == Global.my_race_car_idx:
 					self.my_race_car_id = car.get_instance_id()
 					car.get_path_direction = null
-					# car.set_label(":-)")
+					# car.set_label(Global.my_unique_id)
 				else:
 					car.get_path_direction = self.get_path_direction
 					car.set_label("PC" + str(i+1))

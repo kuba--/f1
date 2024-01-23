@@ -29,6 +29,7 @@ var loaded_curcuit_scene: PackedScene = null
 
 func _ready():
 	Global.race_car_registry.clear()
+	$SettingsPanel/HBoxContainer/Label.text = Global.my_unique_id.substr(0, 3)
 
 	$Container/CarContainer/GreenButton.init(Global.ICON_RACE_CAR_GREEN)
 	$Container/CarContainer/OrangeButton.init(Global.ICON_RACE_CAR_ORANGE)
