@@ -88,7 +88,7 @@ var get_path_direction: Callable = Callable()
 const CTX_N_RAYS: int = 32
 const CTX_LOOK_DISTANCE: float = 10.0
 const CTX_BRAKE_DISTANCE: float = 10.0
-const CTX_BRAKE_CAR_DISTANCE: float = 0.1 * CTX_BRAKE_DISTANCE
+const CTX_BRAKE_CAR_DISTANCE: float = 0.4 * CTX_BRAKE_DISTANCE  # 4.0 units - brake earlier for cars
 const CTX_COLLISION_MASK: int = 0b100 # 4 (3rd bit)
 @onready var ctx_rays := $ContextRays
 var _ctx_paths := []
@@ -105,7 +105,8 @@ func set_ctx_rays():
 		self.ctx_rays.add_child(r)
 
 func set_ctx_paths():
-	assert(self.get_path_direction != null, "get_path_direction is not set")
+	if self.get_path_direction.is_null():
+		return
 	# go forward (-transform.basis.z) unless the circuit has a path.
 	var dir = self.get_path_direction.call(self, transform.origin, -transform.basis.z)
 	for i in CTX_N_RAYS:
@@ -114,14 +115,23 @@ func set_ctx_paths():
 		# set interest
 		self._ctx_paths[i] = max(0, d.dot(dir))
 		if ray.is_colliding():
-			# set danger
+			# set danger - reduce interest based on obstacle type and distance
 			var obj := ray.get_collider()
-			self._ctx_paths[i] = self._ctx_paths[i] * 0.50 if Global.race_car_registry.has(obj) else 0.0
+			var collision_point := ray.get_collision_point()
+			var dist := transform.origin.distance_to(collision_point)
+			var dist_factor := clamp(dist / CTX_LOOK_DISTANCE, 0.0, 1.0)
+			if Global.race_car_registry.has(obj):
+				# Other car - reduce interest based on distance (closer = less interest)
+				self._ctx_paths[i] = self._ctx_paths[i] * dist_factor * 0.3
+			else:
+				# Wall/obstacle - strongly avoid
+				self._ctx_paths[i] = self._ctx_paths[i] * dist_factor * 0.1
 
 func _next_direction() -> Vector3:
 	var dir := Vector3.ZERO
 	for i in CTX_N_RAYS:
-		dir += -self.ctx_rays.get_child(i).global_transform.basis.z * self._ctx_paths[i]
+		var path_weight = self._ctx_paths[i] if i < len(self._ctx_paths) and self._ctx_paths[i] != null else 0.0
+		dir += -self.ctx_rays.get_child(i).global_transform.basis.z * path_weight
 	return dir.normalized()
 
 
@@ -134,7 +144,7 @@ func _init():
 
 # called when the node enters the scene tree for the first time.
 func _ready():
-	if self.get_path_direction != null:
+	if not self.get_path_direction.is_null():
 		set_ctx_rays()
 	else:
 		play_engine_sound(ENGINE)
@@ -159,14 +169,29 @@ func _get_ctx_steering_angle() -> float:
 	var a = v.dot(self.transform.basis.y)
 	var steer_angle = a * self.max_steering_rad * 2.0
 	self._acceleration = -self.transform.basis.z * self.pc_engine_power
-	# check forward ray
-	var ray := self.ctx_rays.get_child(0)
-	if ray.is_colliding():
-		var obj = ray.get_collider()
-		var is_colliding_with_car := Global.race_car_registry.has(obj)
-		var d = transform.origin.distance_to(obj.transform.origin)
-		if (not is_colliding_with_car and d < CTX_BRAKE_DISTANCE) or (d < CTX_BRAKE_CAR_DISTANCE):
-			self._acceleration = -self.transform.basis.z * self.braking_power
+	
+	# check front rays (0 and nearby) for obstacles
+	var should_brake := false
+	var min_car_dist := CTX_LOOK_DISTANCE
+	for ray_idx in [0, 1, CTX_N_RAYS - 1]:  # forward and slightly left/right
+		var ray: RayCast3D = self.ctx_rays.get_child(ray_idx)
+		if ray.is_colliding():
+			var obj = ray.get_collider()
+			var collision_point := ray.get_collision_point()
+			var d = transform.origin.distance_to(collision_point)
+			var is_colliding_with_car := Global.race_car_registry.has(obj)
+			if is_colliding_with_car:
+				min_car_dist = min(min_car_dist, d)
+				if d < CTX_BRAKE_CAR_DISTANCE:
+					should_brake = true
+			elif d < CTX_BRAKE_DISTANCE:
+				should_brake = true
+	
+	if should_brake:
+		self._acceleration = -self.transform.basis.z * self.braking_power
+	elif min_car_dist < CTX_BRAKE_CAR_DISTANCE * 1.5:
+		# Slow down when approaching other cars
+		self._acceleration = -self.transform.basis.z * self.pc_engine_power * 0.5
 
 	return steer_angle
 
@@ -181,7 +206,7 @@ func _input(event: InputEvent):
 		play_engine_sound(BRAKING)
 
 func _input_process():
-	if self.get_path_direction != null:
+	if not self.get_path_direction.is_null():
 		self._steering_angle = _get_ctx_steering_angle()
 		return
 

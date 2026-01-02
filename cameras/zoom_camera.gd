@@ -21,4 +21,3 @@ func _physics_process(delta: float):
 	self._is_equal = global_transform.basis.is_equal_approx(self.target_marker.global_transform.basis)
 	if self._is_equal:
 		emit_signal("camera_position_set")
-
