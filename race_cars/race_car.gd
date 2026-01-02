@@ -90,6 +90,11 @@ const AI_SIDE_RAY_DISTANCE: float = 8.0
 const AI_BRAKE_DISTANCE: float = 5.0
 const AI_COLLISION_MASK: int = 0b100  # 4 (3rd bit)
 
+const AI_LOOK_STEER_GAIN: float = 1.6
+const AI_SPEED_FAST: float = 30.0
+const AI_SPEED_TURN: float = 12.0
+const AI_MIN_THROTTLE_SCALE: float = 0.25
+
 @onready var ctx_rays := $ContextRays
 var _ai_front_ray: RayCast3D
 var _ai_left_ray: RayCast3D
@@ -121,15 +126,29 @@ func _get_ctx_steering_angle() -> float:
 	
 	# Get desired direction from circuit path
 	var path_dir: Vector3 = self.get_path_direction.call(self, global_transform.origin, -global_transform.basis.z)
-	
-	# Calculate base steering to follow path
+	path_dir.y = 0.0
+	if path_dir.length_squared() < 0.0001:
+		path_dir = -global_transform.basis.z
+		path_dir.y = 0.0
+	path_dir = path_dir.normalized()
+
+	# Calculate base steering to follow path (signed angle on XZ plane)
 	var forward := -global_transform.basis.z
-	var cross := forward.cross(path_dir)
-	var path_steer: float = cross.dot(global_transform.basis.y) * self.max_steering_rad * 3.0
-	path_steer = clamp(path_steer, -self.max_steering_rad, self.max_steering_rad)
-	
-	# Default to full throttle
-	self._acceleration = -self.transform.basis.z * self.pc_engine_power
+	forward.y = 0.0
+	if forward.length_squared() < 0.0001:
+		forward = Vector3.FORWARD
+	forward = forward.normalized()
+	var angle: float = forward.signed_angle_to(path_dir, Vector3.UP)
+	var path_steer: float = clamp(angle * AI_LOOK_STEER_GAIN, -self.max_steering_rad, self.max_steering_rad)
+
+	# Corner speed control (slow down when large steering is needed)
+	var steer_ratio: float = clamp(abs(path_steer) / max(self.max_steering_rad, 0.0001), 0.0, 1.0)
+	var desired_speed: float = lerp(AI_SPEED_FAST, AI_SPEED_TURN, steer_ratio)
+	var current_speed: float = self._velocity.length()
+	var throttle_scale: float = clamp(1.0 - steer_ratio, AI_MIN_THROTTLE_SCALE, 1.0)
+	var wants_brake_for_turn := current_speed > desired_speed + 1.0
+	# Default acceleration (may be overridden by obstacle/brake logic below)
+	self._acceleration = -self.transform.basis.z * self.pc_engine_power * throttle_scale
 	
 	# Check for obstacles and adjust steering/throttle
 	var avoid_steer: float = 0.0
@@ -185,6 +204,10 @@ func _get_ctx_steering_angle() -> float:
 		self._acceleration = self.transform.basis.z * self.braking_power  # Brake (reverse direction)
 	elif should_slow:
 		self._acceleration = -self.transform.basis.z * self.pc_engine_power * 0.4
+	elif wants_brake_for_turn:
+		# Brake proportionally to how much we're over the desired corner speed
+		var over: float = clamp((current_speed - desired_speed) / max(desired_speed, 1.0), 0.0, 1.0)
+		self._acceleration = self.transform.basis.z * self.braking_power * (0.35 + 0.65 * over)
 	
 	# Combine path following with obstacle avoidance
 	var final_steer: float = path_steer + avoid_steer

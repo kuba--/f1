@@ -79,8 +79,21 @@ func _get_path_direction(car: RaceCar, pos: Vector3, default: Vector3) -> Vector
 		return default
 
 	assert(path != null and path_follow != null, "path is null")
-	path_follow.progress = path.curve.get_closest_offset(pos)
-	return path_follow.transform.basis.z
+	var speed: float = car._velocity.length() if car != null else 0.0
+	var lookahead: float = clamp(2.5 + speed * 0.35, 2.5, 18.0)
+	var closest: float = path.curve.get_closest_offset(pos)
+	var length: float = path.curve.get_baked_length()
+	var offset: float = closest + lookahead
+	if length > 0.0:
+		offset = fposmod(offset, length)
+	path_follow.progress = offset
+	var target_pos: Vector3 = path_follow.global_transform.origin
+	var dir := target_pos - pos
+	dir.y = 0.0
+	if dir.length_squared() < 0.0001:
+		dir = -path_follow.global_transform.basis.z
+		dir.y = 0.0
+	return dir.normalized()
 
 # Signal handler wrappers for road segments
 func _on_road_start_body_entered(body): _on_race_car_entered(body, 0)
