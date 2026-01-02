@@ -60,7 +60,7 @@ func _circuit_ready():
 				"stats": StatsScript.new(self.roads_count, self.laps_count, self.penalty)
 			})
 			self.race_cars_idx[car] = 0
-			car.get_path_direction = null
+			car.get_path_direction = Callable()
 			car.call_deferred("set_physics_process", false)
 			car.translate(pos.position)
 			add_child(car)
