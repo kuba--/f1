@@ -1,29 +1,29 @@
 class_name StatsPopup
-extends PopupDialog
+extends Popup
 
 const Main: PackedScene = preload("res://main.tscn")
 
-onready var _result_containers: Array = [
+@onready var _result_containers: Array = [
 	$VBoxContainer/ResultsContainer/VBoxContainer/P1Container,
 	$VBoxContainer/ResultsContainer/VBoxContainer/P2Container,
 	$VBoxContainer/ResultsContainer/VBoxContainer/P3Container,
 	$VBoxContainer/ResultsContainer/VBoxContainer/P4Container
 ]
 
-var _icon: Texture = null
+var _icon: Texture2D = null
 
 # Array [
 # 	{ "icon" => Texture, "label" => String, "total" => [ float, float, float ], "disqualified" => bool }
 # ]
 var _results: Array = []
 
-func init(icon: Texture, results: Array):
+func init(icon: Texture2D, results: Array):
 	self._icon = icon
 	self._results = results
 
 
 func _ready():
-	popup_exclusive = true
+	exclusive = true
 	$VBoxContainer/SettingsPanel/HBoxContainer/Icon.texture = self._icon
 	$VBoxContainer/SettingsPanel/HBoxContainer/Icon.visible = true
 	for p in range(len(self._results)):
@@ -45,5 +45,5 @@ func _set_result(p: int, r: Dictionary):
 
 
 func _on_home_pressed():
-	var err := get_tree().change_scene_to(Main)
-	assert(err == OK, "change_scene_to error %d" % err)
+	var err := get_tree().change_scene_to_packed(Main)
+	assert(err == OK, "change_scene_to_packed error %d" % err)

@@ -3,10 +3,10 @@
 [ext_resource path="res://circuits/road_start.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tests/test_overhead_lights.gd" type="Script" id=3]
 
-[node name="TestOverheadLights" type="Spatial"]
+[node name="TestOverheadLights" type="Node3D"]
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.526733, 0.423302, -0.138988 )
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.526733, 0.423302, -0.138988 )
 
 [node name="RoadStart" parent="." instance=ExtResource( 1 )]

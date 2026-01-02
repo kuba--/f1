@@ -1,10 +1,10 @@
 class_name ChaseCamera
-extends Camera
+extends Camera3D
 
-export(bool) var fixed = false
-export(float) var lerp_speed = 6.0
+@export var fixed: bool = false
+@export var lerp_speed: float = 6.0
 
-var _position: Position3D = null
+var _position: Marker3D = null
 
 func _physics_process(delta: float):
 	if not self._position:
@@ -14,5 +14,5 @@ func _physics_process(delta: float):
 	else global_transform.interpolate_with(self._position.global_transform, self.lerp_speed * delta)
 
 
-func _on_camera_position_changed(pos: Position3D):
+func _on_camera_position_changed(pos: Marker3D):
 	self._position = pos

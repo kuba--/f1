@@ -19,7 +19,7 @@
 [ext_resource path="res://circuits/barrier_wall.tscn" type="PackedScene" id=17]
 [ext_resource path="res://circuits/bahrain_circuit.gd" type="Script" id=18]
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="Sky" id=1]
 sky_top_color = Color( 0.0235294, 0.0862745, 0.294118, 1 )
 sky_horizon_color = Color( 0.27451, 0.223529, 0.396078, 1 )
 sun_color = Color( 0.929412, 0.854902, 0.458824, 1 )
@@ -37,37 +37,37 @@ ambient_light_color = Color( 0.0352941, 0.0196078, 0.243137, 1 )
 [sub_resource type="PlaneMesh" id=3]
 size = Vector2( 200, 200 )
 
-[sub_resource type="ConvexPolygonShape" id=4]
-points = PoolVector3Array( 100, 0, 100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
+[sub_resource type="ConvexPolygonShape3D" id=4]
+points = PackedVector3Array( 100, 0, 100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape3D" id=17]
 extents = Vector3( 2, 0.001, 22.5 )
 
 [sub_resource type="Curve3D" id=14]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.06293, 0, -5.17217, 0, 0, 0, 0, 0, 0, 2.23211, -9.15527e-05, -31.3773, 0, 0, 0, 0, 0, 0, 3.63156, -0.000106812, -34.2042, 0, 0, 0, 0, 0, 0, 6.0946, -0.00012207, -36.3594, 0, 0, 0, 0, 0, 0, 10.069, -0.00012207, -37.5909, 0, 0, 0, 0, 0, 0, 13.9595, -0.00012207, -36.4434, 0, 0, 0, 0, 0, 0, 16.2546, -0.000106812, -34.3722, 0, 0, 0, 0, 0, 0, 17.7101, -9.15527e-05, -31.6012, 0, 0, 0, 0, 0, 0, 19.9212, -1.52588e-05, -9.93771, 0, 0, 0, 0, 0, 0, 22.4356, 4.57764e-05, 10.1459, 0, 0, 0, 0, 0, 0, 24.84, 0.000106812, 28.3987 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, 2.06293, 0, -5.17217, 0, 0, 0, 0, 0, 0, 2.23211, -9.15527e-05, -31.3773, 0, 0, 0, 0, 0, 0, 3.63156, -0.000106812, -34.2042, 0, 0, 0, 0, 0, 0, 6.0946, -0.00012207, -36.3594, 0, 0, 0, 0, 0, 0, 10.069, -0.00012207, -37.5909, 0, 0, 0, 0, 0, 0, 13.9595, -0.00012207, -36.4434, 0, 0, 0, 0, 0, 0, 16.2546, -0.000106812, -34.3722, 0, 0, 0, 0, 0, 0, 17.7101, -9.15527e-05, -31.6012, 0, 0, 0, 0, 0, 0, 19.9212, -1.52588e-05, -9.93771, 0, 0, 0, 0, 0, 0, 22.4356, 4.57764e-05, 10.1459, 0, 0, 0, 0, 0, 0, 24.84, 0.000106812, 28.3987 ),
+"tilts": PackedFloat32Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=15]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.32996, 0.000137329, 37.4226, 0, 0, 0, 0, 0, 0, -47.4638, 0.000137329, 37.5134 ),
-"tilts": PoolRealArray( 0, 0 )
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, -2.32996, 0.000137329, 37.4226, 0, 0, 0, 0, 0, 0, -47.4638, 0.000137329, 37.5134 ),
+"tilts": PackedFloat32Array( 0, 0 )
 }
 
 [sub_resource type="Curve3D" id=16]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -72.6949, 0, 35.3958, 0, 0, 0, 0, 0, 0, -75.1729, 0, 30.2595, 0, 0, 0, 0, 0, 0, -72.6949, 0, 24.4473, 0, 0, 0, 0, 0, 0, -45.5818, 0, 22.8851, 0, 0, 0, 0, 0, 0, -42.2373, 0, 24.6726, 0, 0, 0, 0, 0, 0, -40.403, 0, 27.5669, 0, 0, 0, 0, 0, 0, -37.0838, 0, 52.9426, 0, 0, 0, 0, 0, 0, -35.058, 0, 55.7275, 0, 0, 0, 0, 0, 0, -32.2053, 0, 57.3064, 0, 0, 0, 0, 0, 0, -22.848, 0, 57.1974, 0, 0, 0, 0, 0, 0, -19.573, 0, 55.3146, 0, 0, 0, 0, 0, 0, -17.7148, 0, 51.8046, 0, 0, 0, 0, 0, 0, -17.3795, 0, 27.396, 0, 0, 0, 0, 0, 0, -14.9574, 0, 24.2181, 0, 0, 0, 0, 0, 0, -11.4519, -1.52588e-05, 22.8304, 0, 0, 0, 0, 0, 0, -4.70732, 0, 22.5551, 0, 0, 0, 0, 0, 0, -2.4359, 4.57764e-05, 21.9207, 0, 0, 0, 0, 0, 0, -0.478927, 4.57764e-05, 20.6603, 0, 0, 0, 0, 0, 0, 0.947347, -3.05176e-05, 19.1345, 0, 0, 0, 0, 0, 0, 1.71024, -4.57764e-05, 17.1444, 0, 0, 0, 0, 0, 0, 2.0751, -4.57764e-05, 14.9884, 0, 0, 0, 0, 0, 0, 2.10827, -6.10352e-05, 12.9319, 0, 0, 0, 0, 0, 0, 2.09877, -6.10352e-05, 10.0156 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, -72.6949, 0, 35.3958, 0, 0, 0, 0, 0, 0, -75.1729, 0, 30.2595, 0, 0, 0, 0, 0, 0, -72.6949, 0, 24.4473, 0, 0, 0, 0, 0, 0, -45.5818, 0, 22.8851, 0, 0, 0, 0, 0, 0, -42.2373, 0, 24.6726, 0, 0, 0, 0, 0, 0, -40.403, 0, 27.5669, 0, 0, 0, 0, 0, 0, -37.0838, 0, 52.9426, 0, 0, 0, 0, 0, 0, -35.058, 0, 55.7275, 0, 0, 0, 0, 0, 0, -32.2053, 0, 57.3064, 0, 0, 0, 0, 0, 0, -22.848, 0, 57.1974, 0, 0, 0, 0, 0, 0, -19.573, 0, 55.3146, 0, 0, 0, 0, 0, 0, -17.7148, 0, 51.8046, 0, 0, 0, 0, 0, 0, -17.3795, 0, 27.396, 0, 0, 0, 0, 0, 0, -14.9574, 0, 24.2181, 0, 0, 0, 0, 0, 0, -11.4519, -1.52588e-05, 22.8304, 0, 0, 0, 0, 0, 0, -4.70732, 0, 22.5551, 0, 0, 0, 0, 0, 0, -2.4359, 4.57764e-05, 21.9207, 0, 0, 0, 0, 0, 0, -0.478927, 4.57764e-05, 20.6603, 0, 0, 0, 0, 0, 0, 0.947347, -3.05176e-05, 19.1345, 0, 0, 0, 0, 0, 0, 1.71024, -4.57764e-05, 17.1444, 0, 0, 0, 0, 0, 0, 2.0751, -4.57764e-05, 14.9884, 0, 0, 0, 0, 0, 0, 2.10827, -6.10352e-05, 12.9319, 0, 0, 0, 0, 0, 0, 2.09877, -6.10352e-05, 10.0156 ),
+"tilts": PackedFloat32Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[node name="BahrainCircuit" type="Spatial"]
+[node name="BahrainCircuit" type="Node3D"]
 script = ExtResource( 18 )
 
 [node name="CircuitControl" parent="." instance=ExtResource( 3 )]
 
 [node name="ZoomCamera" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 17.347, 35, 35 )
+transform = Transform3D( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 17.347, 35, 35 )
 current = true
 
 [node name="ChaseCamera" parent="." instance=ExtResource( 2 )]
@@ -75,346 +75,319 @@ current = true
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.866026, 0.5, 0, -0.5, -0.866026, 0, 12.4854, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, -0.866026, 0.5, 0, -0.5, -0.866026, 0, 12.4854, 0 )
 light_energy = 0.3
 
-[node name="Ground" type="StaticBody" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 
-[node name="Mesh" type="MeshInstance" parent="Ground"]
+[node name="Mesh" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource( 3 )
 material/0 = ExtResource( 4 )
 
-[node name="Collision" type="CollisionShape" parent="Ground"]
+[node name="Collision" type="CollisionShape3D" parent="Ground"]
 shape = SubResource( 4 )
 
-[node name="P1" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 1.23 )
+[node name="P1" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 1.23 )
 
-[node name="P2" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 3.73 )
+[node name="P2" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 3.73 )
 
-[node name="P3" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 6.23 )
+[node name="P3" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.362, 0.057, 6.23 )
 
-[node name="P4" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 8.73 )
+[node name="P4" type="Marker3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.638, 0.057, 8.73 )
 
-[node name="Bridge" type="StaticBody" parent="."]
+[node name="Bridge" type="StaticBody3D" parent="."]
 
-[node name="Collision" type="CollisionShape" parent="Bridge"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 2.55, 37.5 )
+[node name="Collision" type="CollisionShape3D" parent="Bridge"]
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -25, 2.55, 37.5 )
 shape = SubResource( 17 )
 
 [node name="BarrierWall" parent="." instance=ExtResource( 17 )]
-transform = Transform( 45, 0, 0, 0, 5, 0, 0, 0, 5, -47.5, 2.51, 39.8389 )
+transform = Transform3D( 45, 0, 0, 0, 5, 0, 0, 0, 5, -47.5, 2.51, 39.8389 )
 
 [node name="BarrierWall2" parent="." instance=ExtResource( 17 )]
-transform = Transform( 45, 0, 0, 0, 5, 0, 0, 0, 5, -47.5, 2.51, 35.7748 )
+transform = Transform3D( 45, 0, 0, 0, 5, 0, 0, 0, 5, -47.5, 2.51, 35.7748 )
 
 [node name="RoadStart" parent="." instance=ExtResource( 5 )]
 
 [node name="RoadStraightLong1" parent="." instance=ExtResource( 7 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -10 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -10 )
 
 [node name="RoadStraightLong2" parent="." instance=ExtResource( 7 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -20 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -20 )
 
 [node name="RoadCornerLargeBorder3" parent="." instance=ExtResource( 9 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -30 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, -30 )
 
 [node name="RoadCornerLargeBorder4" parent="." instance=ExtResource( 9 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0.01, -40 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0.01, -40 )
 
 [node name="RoadCurved5" parent="." instance=ExtResource( 8 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 10, 17.5, 0.01, -10 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 10, 17.5, 0.01, -10 )
 
 [node name="RoadCurved6" parent="." instance=ExtResource( 8 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 10, 20, 0.01, 10 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 10, 20, 0.01, 10 )
 
 [node name="RoadCurved7" parent="." instance=ExtResource( 8 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 10, 22.5, 0.01, 30 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 10, 22.5, 0.01, 30 )
 
 [node name="RoadCornerLargeBorder8" parent="." instance=ExtResource( 9 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 27.5, 0.01, 30 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 27.5, 0.01, 30 )
 
 [node name="RoadRampLongWall9" parent="." instance=ExtResource( 10 )]
-transform = Transform( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, 17.5, 0.01, 40 )
+transform = Transform3D( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, 17.5, 0.01, 40 )
 
 [node name="RoadStraightLong10" parent="." instance=ExtResource( 7 )]
-transform = Transform( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, -2.5, 2.51, 40 )
+transform = Transform3D( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, -2.5, 2.51, 40 )
 
 [node name="RoadStraightBridge11" parent="." instance=ExtResource( 11 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -22.5, 0.01, 40 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -22.5, 0.01, 40 )
 linear_damp = 0.0
 
 [node name="RoadStraightLong12" parent="." instance=ExtResource( 7 )]
-transform = Transform( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, -27.5, 2.51, 40 )
+transform = Transform3D( -2.18557e-07, 0, 10, 0, 5, 0, -5, 0, -4.37114e-07, -27.5, 2.51, 40 )
 
 [node name="RoadRampLongWall13" parent="." instance=ExtResource( 10 )]
-transform = Transform( -2.18557e-07, 0, -10, 0, 5, 0, 5, 0, -4.37114e-07, -67.5, 0.01, 35 )
+transform = Transform3D( -2.18557e-07, 0, -10, 0, 5, 0, 5, 0, -4.37114e-07, -67.5, 0.01, 35 )
 
 [node name="RoadCornerLargeBorder14" parent="." instance=ExtResource( 9 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -67.5, 0.01, 40 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -67.5, 0.01, 40 )
 
 [node name="RoadCornerLargeBorder15" parent="." instance=ExtResource( 9 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -77.5, 0.01, 30 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -77.5, 0.01, 30 )
 
 [node name="RoadStraightLong16" parent="." instance=ExtResource( 7 )]
-transform = Transform( -2.18557e-07, 0, -10, 0, 5, 0, 5, 0, -4.37114e-07, -67.5, 0.01, 20 )
+transform = Transform3D( -2.18557e-07, 0, -10, 0, 5, 0, 5, 0, -4.37114e-07, -67.5, 0.01, 20 )
 
 [node name="RoadCornerLargeBorder17" parent="." instance=ExtResource( 9 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -47.5, 0.01, 20 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -47.5, 0.01, 20 )
 
 [node name="RoadCurved18" parent="." instance=ExtResource( 8 )]
-transform = Transform( -5, 0, -1.50996e-06, 0, 5, 0, 7.54979e-07, 0, -10, -37.5, 0.01, 30 )
+transform = Transform3D( -5, 0, -1.50996e-06, 0, 5, 0, 7.54979e-07, 0, -10, -37.5, 0.01, 30 )
 
 [node name="RoadCornerLargeBorder19" parent="." instance=ExtResource( 9 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -30, 0.01, 60 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -30, 0.01, 60 )
 
 [node name="RoadStraight20" parent="." instance=ExtResource( 12 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -30, 0.01, 55 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -30, 0.01, 55 )
 
 [node name="RoadCornerLargeBorder21" parent="." instance=ExtResource( 9 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -15, 0.01, 50 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -15, 0.01, 50 )
 
 [node name="RoadStraightLong22" parent="." instance=ExtResource( 7 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 10, -20, 0.01, 50 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 10, -20, 0.01, 50 )
 
 [node name="RoadCornerLargeBorder23" parent="." instance=ExtResource( 9 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -20, 0.01, 30 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -20, 0.01, 30 )
 
 [node name="RoadStraight24" parent="." instance=ExtResource( 12 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -10, 0.01, 20 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -10, 0.01, 20 )
 
 [node name="RoadCornerLargeBorder25" parent="." instance=ExtResource( 9 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 5, 0.01, 15 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 5, 0.01, 15 )
 
 [node name="RoadStraight26" parent="." instance=ExtResource( 12 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, 15.0002 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.01, 15.0002 )
 
 [node name="LightPost_1" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 0 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 0 )
 
 [node name="LightPost_2" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 0 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 0 )
 
 [node name="LightPost_3" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -10 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -10 )
 
 [node name="LightPost_4" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10.7049, 0, -10 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10.7049, 0, -10 )
 
 [node name="LightPost_5" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -20 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -20 )
 
 [node name="LightPost_6" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, -20 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, -20 )
 
 [node name="LightPost_7" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -34.0358 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, -34.0358 )
 
 [node name="LightPost_8" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 9.7367, 0, -44.4135 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 9.7367, 0, -44.4135 )
 
 [node name="LightPost_9" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 25.6297, 0, -34.4871 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 25.6297, 0, -34.4871 )
 
 [node name="LightPost_10" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 26.5956, 0, -20 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 26.5956, 0, -20 )
 
 [node name="LightPost_11" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12, 0, -20 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12, 0, -20 )
 
 [node name="LightPost_12" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 28.1025, 0, -10 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 28.1025, 0, -10 )
 
 [node name="LightPost_13" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12, 0, -10 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12, 0, -10 )
 
 [node name="LightPost_14" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.1467, 0, 0 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.1467, 0, 0 )
 
 [node name="LightPost_15" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12.8171, 0, 0 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 12.8171, 0, 0 )
 
 [node name="LightPost_16" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.3855, 0, 10 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.3855, 0, 10 )
 
 [node name="LightPost_17" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 14.1235, 0, 10 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 14.1235, 0, 10 )
 
 [node name="LightPost_18" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.1428, 0, 17.8785 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 29.1428, 0, 17.8785 )
 
 [node name="LightPost_19" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 14.1235, 0, 21.444 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 14.1235, 0, 21.444 )
 
 [node name="LightPost_20" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 30.9891, 0, 25.3801 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 30.9891, 0, 25.3801 )
 
 [node name="LightPost_21" parent="." instance=ExtResource( 6 )]
-transform = Transform( 3.53553, 0, 3.53553, 0, 5, 0, -3.53553, 0, 3.53553, 16.0678, 0, 27.5001 )
+transform = Transform3D( 3.53553, 0, 3.53553, 0, 5, 0, -3.53553, 0, 3.53553, 16.0678, 0, 27.5001 )
 
 [node name="LightPost_22" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, -2.5, 28.8358, 0, 38.7418 )
+transform = Transform3D( -2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, -2.5, 28.8358, 0, 38.7418 )
 
 [node name="LightPost_23" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 16.6875, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 16.6875, 0, 43.7637 )
 
 [node name="LightPost_24" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 9.7367, 0, 31.4749 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, 9.7367, 0, 31.4749 )
 
 [node name="LightPost_25" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0.910759, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0.910759, 0, 43.7637 )
 
 [node name="LightPost_26" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -6.43624, 0, 31.4749 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -6.43624, 0, 31.4749 )
 
 [node name="LightPost_27" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -12.8567, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -12.8567, 0, 43.7637 )
 
 [node name="LightPost_28" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -22.8288, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -22.8288, 0, 43.7637 )
 
 [node name="LightPost_29" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -28.3772, 0, 31.4749 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -28.3772, 0, 31.4749 )
 
 [node name="LightPost_30" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -33.6196, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -33.6196, 0, 43.7637 )
 
 [node name="LightPost_31" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -44.187, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -44.187, 0, 43.7637 )
 
 [node name="LightPost_32" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -52.2432, 0, 31.4749 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -52.2432, 0, 31.4749 )
 
 [node name="LightPost_33" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -58.7731, 0, 43.7637 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -58.7731, 0, 43.7637 )
 
 [node name="LightPost_34" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -81.6394, 0, 29.8102 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -81.6394, 0, 29.8102 )
 
 [node name="LightPost_35" parent="." instance=ExtResource( 6 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -65.5642, 0, 31.4749 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -65.5642, 0, 31.4749 )
 
 [node name="LightPost_36" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -62.1337, 0, 28.3491 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -62.1337, 0, 28.3491 )
 
 [node name="LightPost_37" parent="." instance=ExtResource( 6 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -53.0748, 0, 28.3491 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, -53.0748, 0, 28.3491 )
 
 [node name="LightPost_38" parent="." instance=ExtResource( 6 )]
-transform = Transform( 2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, 2.5, -37.1802, 0, 23.1974 )
+transform = Transform3D( 2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, 2.5, -37.1802, 0, 23.1974 )
 
 [node name="LightPost_39" parent="." instance=ExtResource( 6 )]
-transform = Transform( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, -22.5377, 0, 23.1974 )
+transform = Transform3D( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, -22.5377, 0, 23.1974 )
 
 [node name="LightPost_40" parent="." instance=ExtResource( 6 )]
-transform = Transform( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, -5, 0, 16.504 )
+transform = Transform3D( 2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, -5, 0, 16.504 )
 
 [node name="LightPost_41" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 10 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5, 0, 10 )
 
 [node name="LightPost_42" parent="." instance=ExtResource( 6 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 10 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 10, 0, 10 )
 
 [node name="GrandStandCovered_1" parent="." instance=ExtResource( 13 )]
-transform = Transform( -2.18557e-06, 0, 10, 0, 5, 0, -50, 0, -4.37114e-07, -16.36, 0, 6.37 )
+transform = Transform3D( -2.18557e-06, 0, 10, 0, 5, 0, -50, 0, -4.37114e-07, -16.36, 0, 6.37 )
 
 [node name="GrandStandCoveredRound_2" parent="." instance=ExtResource( 14 )]
-transform = Transform( -4.37114e-07, 0, 10, 0, 5, 0, -10, 0, -4.37114e-07, -16.37, 0, -43.634 )
+transform = Transform3D( -4.37114e-07, 0, 10, 0, 5, 0, -10, 0, -4.37114e-07, -16.37, 0, -43.634 )
 
 [node name="GrandStandCovered_3" parent="." instance=ExtResource( 13 )]
-transform = Transform( 40, 0, 0, 0, 5, 0, 0, 0, 10, -10, 0, -50 )
+transform = Transform3D( 40, 0, 0, 0, 5, 0, 0, 0, 10, -10, 0, -50 )
 
 [node name="GrandStandCoveredRound_4" parent="." instance=ExtResource( 14 )]
-transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, 30, 0, -50 )
+transform = Transform3D( 10, 0, 0, 0, 5, 0, 0, 0, 10, 30, 0, -50 )
 
 [node name="GrandStandCovered_5" parent="." instance=ExtResource( 13 )]
-transform = Transform( -4.37114e-06, 0, -10, 0, 5, 0, 100, 0, -4.37114e-07, 36.3662, 0, -43.6339 )
+transform = Transform3D( -4.37114e-06, 0, -10, 0, 5, 0, 100, 0, -4.37114e-07, 36.3662, 0, -43.6339 )
 
 [node name="GrandStandCoveredRound_6" parent="." instance=ExtResource( 14 )]
-transform = Transform( -4.37114e-07, 0, -10, 0, 5, 0, 10, 0, -4.37114e-07, 36.366, 0, 56.3519 )
+transform = Transform3D( -4.37114e-07, 0, -10, 0, 5, 0, 10, 0, -4.37114e-07, 36.366, 0, 56.3519 )
 
 [node name="GrandStandCovered_7" parent="." instance=ExtResource( 13 )]
-transform = Transform( -40, 0, -8.74228e-07, 0, 5, 0, 3.49691e-06, 0, -10, 30.0001, 0, 62.7182 )
+transform = Transform3D( -40, 0, -8.74228e-07, 0, 5, 0, 3.49691e-06, 0, -10, 30.0001, 0, 62.7182 )
 
 [node name="GrandStandCovered_8" parent="." instance=ExtResource( 13 )]
-transform = Transform( -40, 0, -8.74228e-07, 0, 5, 0, 3.49691e-06, 0, -10, -10, 0, 62.718 )
+transform = Transform3D( -40, 0, -8.74228e-07, 0, 5, 0, 3.49691e-06, 0, -10, -10, 0, 62.718 )
 
 [node name="GrandStandCovered_9" parent="." instance=ExtResource( 13 )]
-transform = Transform( -36, 0, -1.50996e-06, 0, 5, 0, 5.43585e-06, 0, -10, -50, 0, 62.718 )
+transform = Transform3D( -36, 0, -1.50996e-06, 0, 5, 0, 5.43585e-06, 0, -10, -50, 0, 62.718 )
 
 [node name="PitsOffice_1" parent="." instance=ExtResource( 15 )]
-transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, -26.289, 0, 16.4 )
+transform = Transform3D( 10, 0, 0, 0, 5, 0, 0, 0, 10, -26.289, 0, 16.4 )
 
 [node name="PitsOffice_2" parent="." instance=ExtResource( 15 )]
-transform = Transform( -4.37114e-07, 0, 10, 0, 5, 0, -10, 0, -4.37114e-07, -86.7328, 0, 26.7857 )
+transform = Transform3D( -4.37114e-07, 0, 10, 0, 5, 0, -10, 0, -4.37114e-07, -86.7328, 0, 26.7857 )
 
 [node name="PitsOffice_3" parent="." instance=ExtResource( 15 )]
-transform = Transform( -1.57361e-06, 0, 10, 0, 5, 0, -36, 0, -4.37114e-07, -86.733, 0, 62.786 )
+transform = Transform3D( -1.57361e-06, 0, 10, 0, 5, 0, -36, 0, -4.37114e-07, -86.733, 0, 62.786 )
 
 [node name="PitsOfficeRoof_4" parent="." instance=ExtResource( 16 )]
-transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, -36.289, 0, 16.3998 )
+transform = Transform3D( 10, 0, 0, 0, 5, 0, 0, 0, 10, -36.289, 0, 16.3998 )
 
 [node name="PitsOfficeRoof_5" parent="." instance=ExtResource( 16 )]
-transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, -46.289, 0, 16.4 )
+transform = Transform3D( 10, 0, 0, 0, 5, 0, 0, 0, 10, -46.289, 0, 16.4 )
 
 [node name="PitsOfficeRoof_6" parent="." instance=ExtResource( 16 )]
-transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 10, -56.289, 0, 16.4 )
+transform = Transform3D( 10, 0, 0, 0, 5, 0, 0, 0, 10, -56.289, 0, 16.4 )
 
 [node name="PitsOfficeRoof_7" parent="." instance=ExtResource( 16 )]
-transform = Transform( 30, 0, 0, 0, 5, 0, 0, 0, 10, -86.289, 0, 16.4 )
+transform = Transform3D( 30, 0, 0, 0, 5, 0, 0, 0, 10, -86.289, 0, 16.4 )
 
-[node name="Path0_7" type="Path" parent="."]
+[node name="Path0_7" type="Path3D" parent="."]
 curve = SubResource( 14 )
 
-[node name="PathFollow" type="PathFollow" parent="Path0_7"]
-transform = Transform( -0.999979, 2.25569e-08, 0.00645654, 0, 1, -3.49358e-06, -0.0064566, -3.49355e-06, -0.999969, 2.06293, 0, -5.17217 )
+[node name="PathFollow3D" type="PathFollow3D" parent="Path0_7"]
+transform = Transform3D( -0.999979, 2.25569e-08, 0.00645654, 0, 1, -3.49358e-06, -0.0064566, -3.49355e-06, -0.999969, 2.06293, 0, -5.17217 )
 rotation_mode = 4
 loop = false
 
-[node name="Path8_13" type="Path" parent="."]
+[node name="Path8_13" type="Path3D" parent="."]
 curve = SubResource( 15 )
 
-[node name="PathFollow" type="PathFollow" parent="Path8_13"]
-transform = Transform( 0.00201942, -7.26741e-11, -0.999992, 0, 1, -7.26738e-11, 0.999998, 1.4676e-13, 0.00201941, -2.32996, 0.000137329, 37.4226 )
+[node name="PathFollow3D" type="PathFollow3D" parent="Path8_13"]
+transform = Transform3D( 0.00201942, -7.26741e-11, -0.999992, 0, 1, -7.26738e-11, 0.999998, 1.4676e-13, 0.00201941, -2.32996, 0.000137329, 37.4226 )
 rotation_mode = 4
 loop = false
 
-[node name="Path14_26" type="Path" parent="."]
+[node name="Path14_26" type="Path3D" parent="."]
 curve = SubResource( 16 )
 
-[node name="PathFollow" type="PathFollow" parent="Path14_26"]
-transform = Transform( -0.900649, 0, -0.434547, 0, 1, 0, 0.434547, 0, -0.900649, -72.6949, 0, 35.3958 )
+[node name="PathFollow3D" type="PathFollow3D" parent="Path14_26"]
+transform = Transform3D( -0.900649, 0, -0.434547, 0, 1, 0, 0.434547, 0, -0.900649, -72.6949, 0, 35.3958 )
 rotation_mode = 4
 loop = false
 
-[connection signal="body_entered" from="RoadStart" to="." method="_on_race_car_entered" binds= [ 0 ]]
-[connection signal="body_entered" from="RoadStraightLong1" to="." method="_on_race_car_entered" binds= [ 1 ]]
-[connection signal="body_entered" from="RoadStraightLong2" to="." method="_on_race_car_entered" binds= [ 2 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder3" to="." method="_on_race_car_entered" binds= [ 3 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder4" to="." method="_on_race_car_entered" binds= [ 4 ]]
-[connection signal="body_entered" from="RoadCurved5" to="." method="_on_race_car_entered" binds= [ 5 ]]
-[connection signal="body_entered" from="RoadCurved6" to="." method="_on_race_car_entered" binds= [ 6 ]]
-[connection signal="body_entered" from="RoadCurved7" to="." method="_on_race_car_entered" binds= [ 7 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder8" to="." method="_on_race_car_entered" binds= [ 8 ]]
-[connection signal="body_entered" from="RoadRampLongWall9" to="." method="_on_race_car_entered" binds= [ 9 ]]
-[connection signal="body_entered" from="RoadStraightLong10" to="." method="_on_race_car_entered" binds= [ 10 ]]
-[connection signal="body_entered" from="RoadStraightBridge11" to="." method="_on_race_car_entered" binds= [ 11 ]]
-[connection signal="body_entered" from="RoadStraightLong12" to="." method="_on_race_car_entered" binds= [ 12 ]]
-[connection signal="body_entered" from="RoadRampLongWall13" to="." method="_on_race_car_entered" binds= [ 13 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder14" to="." method="_on_race_car_entered" binds= [ 14 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder15" to="." method="_on_race_car_entered" binds= [ 15 ]]
-[connection signal="body_entered" from="RoadStraightLong16" to="." method="_on_race_car_entered" binds= [ 16 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder17" to="." method="_on_race_car_entered" binds= [ 17 ]]
-[connection signal="body_entered" from="RoadCurved18" to="." method="_on_race_car_entered" binds= [ 18 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder19" to="." method="_on_race_car_entered" binds= [ 19 ]]
-[connection signal="body_entered" from="RoadStraight20" to="." method="_on_race_car_entered" binds= [ 20 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder21" to="." method="_on_race_car_entered" binds= [ 21 ]]
-[connection signal="body_entered" from="RoadStraightLong22" to="." method="_on_race_car_entered" binds= [ 22 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder23" to="." method="_on_race_car_entered" binds= [ 23 ]]
-[connection signal="body_entered" from="RoadStraight24" to="." method="_on_race_car_entered" binds= [ 24 ]]
-[connection signal="body_entered" from="RoadCornerLargeBorder25" to="." method="_on_race_car_entered" binds= [ 25 ]]
-[connection signal="body_entered" from="RoadStraight26" to="." method="_on_race_car_entered" binds= [ 26 ]]

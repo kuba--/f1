@@ -1,7 +1,7 @@
 class_name Main
 extends Control
 
-onready var race_car_buttons = [
+@onready var race_car_buttons = [
 	$Container/CarContainer/GreenButton,
 	$Container/CarContainer/OrangeButton,
 	$Container/CarContainer/RedButton,
@@ -9,7 +9,7 @@ onready var race_car_buttons = [
 ]
 var selected_race_car_idx = null
 
-onready var circuit_buttons = [
+@onready var circuit_buttons = [
 	$Container/CircuitContainer/ChinaButton,
 	$Container/CircuitContainer/PolandButton,
 	$Container/CircuitContainer/MexicoButton,
@@ -17,14 +17,14 @@ onready var circuit_buttons = [
 ]
 var selected_cicruit_idx = null
 
-onready var mode_buttons = [
+@onready var mode_buttons = [
 	$Container/ModeContainer/TimeButton,
 	$Container/ModeContainer/RacingButton,
 	$Container/ModeContainer/MultiplayerButton
 ]
 var selected_mode_idx = null
 
-onready var root := get_tree()
+@onready var root := get_tree()
 var loaded_curcuit_scene: PackedScene = null
 
 func _ready():
@@ -83,8 +83,8 @@ func _on_mode_button_pressed(selected: bool, idx: int):
 				_set_mode_buttons_disabled()
 				Global.game_play_mode = idx
 #				self.root.call_deferred("change_scene_to", curcuit_scene)
-				var err := self.root.change_scene_to(self.loaded_curcuit_scene)
-				assert(err == OK, "node.change_scene_to error %d" % err)
+				var err := self.root.change_scene_to_packed(self.loaded_curcuit_scene)
+				assert(err == OK, "node.change_scene_to_packed error %d" % err)
 			Global.Mode.MULTIPLAYER:
 				print_debug("MULTIPLAYER not implemented, yet")
 
@@ -117,14 +117,20 @@ func _load_circuit() -> PackedScene:
 	_set_race_car_buttons_disabled()
 	_set_circuit_buttons_disabled()
 
-	var loader := ResourceLoader.load_interactive(Global.CIRCUITS[self.selected_cicruit_idx], "PackedScene")
-	self.circuit_buttons[self.selected_cicruit_idx].set_max(loader.get_stage_count())
+	var path = Global.CIRCUITS[self.selected_cicruit_idx]
+	var err := ResourceLoader.load_threaded_request(path, "PackedScene")
+	assert(err == OK, "load_threaded_request error %d" % err)
+	
+	self.circuit_buttons[self.selected_cicruit_idx].set_max(1.0)
 	while scene == null:
-		var err := loader.poll()
-		if err == ERR_FILE_EOF:
-			self.circuit_buttons[self.selected_cicruit_idx].set_progress(loader.get_stage_count())
-			scene = loader.get_resource() as PackedScene
+		var progress: Array = []
+		var status := ResourceLoader.load_threaded_get_status(path, progress)
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			scene = ResourceLoader.load_threaded_get(path) as PackedScene
 			Global.CIRCUITS_CACHE[self.selected_cicruit_idx] = scene
-		assert(err == OK || err == ERR_FILE_EOF, "loader.poll error %d" % err)
-		self.circuit_buttons[self.selected_cicruit_idx].set_progress(loader.get_stage())
+		elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			if progress.size() > 0:
+				self.circuit_buttons[self.selected_cicruit_idx].set_progress(progress[0])
+		else:
+			assert(false, "Resource loading failed with status %d" % status)
 	return scene

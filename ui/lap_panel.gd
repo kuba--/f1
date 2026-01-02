@@ -1,9 +1,9 @@
 class_name LapPanel
 extends PanelContainer
 
-onready var count_label := $Container/CountLabel
-onready var penalty_label := $Container/PenaltyLabel
-onready var time_label := $Container/TimeLabel
+@onready var count_label := $Container/CountLabel
+@onready var penalty_label := $Container/PenaltyLabel
+@onready var time_label := $Container/TimeLabel
 
 func set_lap(idx: int, penalty: float, time: float):
 	self.count_label.text = ("%d:" % idx)

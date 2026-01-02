@@ -6,13 +6,13 @@ var _laps_count: int = 0
 var _penalty: float
 
 # current road index
-var _road_idx: int = 0 setget ,current_road_idx
+var _road_idx: int = 0: get = current_road_idx
 
 # next road index
 var _next_road_idx: int = 1
 
 # current lap index
-var _lap_idx: int = 0 setget ,lap_idx
+var _lap_idx: int = 0: get = lap_idx
 
 # lap elapsed_times in seconds
 var _laps: Array = []

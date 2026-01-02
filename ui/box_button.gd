@@ -5,21 +5,21 @@ signal on_pressed(selected)
 
 const BG_COLOR: Color = Color("#525969")
 
-onready var button: TextureButton = $TextureButton
-onready var progress: TextureProgress = $TextureProgress
+@onready var button: TextureButton = $TextureButton
+@onready var progress: TextureProgressBar = $TextureProgressBar
 
-func init(icon: Texture, disabled: bool = false):
+func init(icon: Texture2D, disabled: bool = false):
 	button.texture_normal = icon
 	button.disabled = disabled
 	progress.texture_progress = icon
 
 func reset():
-	get_stylebox("panel").bg_color = BG_COLOR
+	get_theme_stylebox("panel").bg_color = BG_COLOR
 
 func _on_pressed():
-	var stylebox = get_stylebox("panel")
-	var selected: bool = stylebox.bg_color == Color.black
-	stylebox.bg_color = BG_COLOR if selected else Color.black
+	var stylebox = get_theme_stylebox("panel")
+	var selected: bool = stylebox.bg_color == Color.BLACK
+	stylebox.bg_color = BG_COLOR if selected else Color.BLACK
 	emit_signal("on_pressed", not selected)
 
 func set_disabled(value: bool):

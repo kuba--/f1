@@ -20,23 +20,23 @@ corner_radius_bottom_left = 5
 
 [node name="BoxButton" type="PanelContainer"]
 self_modulate = Color( 1, 1, 1, 0.196078 )
-custom_styles/panel = SubResource( 1 )
+theme_override_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 
-[node name="TextureProgress" type="TextureProgress" parent="."]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 visible = false
 show_behind_parent = true
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 6.0
-margin_bottom = 6.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 6.0
+offset_bottom = 6.0
 fill_mode = 3
 
 [node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 5.0
-margin_bottom = 5.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 5.0
+offset_bottom = 5.0
 shortcut_in_tooltip = false
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_pressed"]
