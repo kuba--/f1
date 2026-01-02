@@ -84,55 +84,111 @@ var get_steering_angle: Callable = Callable()
 var get_path_direction: Callable = Callable()
 
 
-# context behaviors
-const CTX_N_RAYS: int = 32
-const CTX_LOOK_DISTANCE: float = 10.0
-const CTX_BRAKE_DISTANCE: float = 10.0
-const CTX_BRAKE_CAR_DISTANCE: float = 0.4 * CTX_BRAKE_DISTANCE  # 4.0 units - brake earlier for cars
-const CTX_COLLISION_MASK: int = 0b100 # 4 (3rd bit)
+# AI driving system
+const AI_FRONT_RAY_DISTANCE: float = 15.0
+const AI_SIDE_RAY_DISTANCE: float = 8.0
+const AI_BRAKE_DISTANCE: float = 5.0
+const AI_COLLISION_MASK: int = 0b100  # 4 (3rd bit)
+
 @onready var ctx_rays := $ContextRays
-var _ctx_paths := []
+var _ai_front_ray: RayCast3D
+var _ai_left_ray: RayCast3D
+var _ai_right_ray: RayCast3D
+var _ai_far_left_ray: RayCast3D
+var _ai_far_right_ray: RayCast3D
+
 func set_ctx_rays():
-	self._ctx_paths.resize(CTX_N_RAYS)
-	var angle: float = TAU / CTX_N_RAYS # 2.0 * PI / CTX_N_RAYS
-	for i in CTX_N_RAYS:
-		var r := RayCast3D.new()
-		r.target_position = Vector3.FORWARD * CTX_LOOK_DISTANCE
-		r.rotation.y = -angle * i
-		r.enabled = true
-		r.collision_mask |= CTX_COLLISION_MASK
-		r.add_exception(self)
-		self.ctx_rays.add_child(r)
+	# Create 5 rays: front, left, right, far-left, far-right
+	_ai_front_ray = _create_ai_ray(0.0, AI_FRONT_RAY_DISTANCE)
+	_ai_left_ray = _create_ai_ray(deg_to_rad(25), AI_SIDE_RAY_DISTANCE)
+	_ai_right_ray = _create_ai_ray(deg_to_rad(-25), AI_SIDE_RAY_DISTANCE)
+	_ai_far_left_ray = _create_ai_ray(deg_to_rad(50), AI_SIDE_RAY_DISTANCE * 0.7)
+	_ai_far_right_ray = _create_ai_ray(deg_to_rad(-50), AI_SIDE_RAY_DISTANCE * 0.7)
 
-func set_ctx_paths():
+func _create_ai_ray(angle_y: float, distance: float) -> RayCast3D:
+	var r := RayCast3D.new()
+	r.target_position = Vector3.FORWARD * distance
+	r.rotation.y = angle_y
+	r.enabled = true
+	r.collision_mask = AI_COLLISION_MASK
+	r.add_exception(self)
+	self.ctx_rays.add_child(r)
+	return r
+
+func _get_ctx_steering_angle() -> float:
 	if self.get_path_direction.is_null():
-		return
-	# go forward (-transform.basis.z) unless the circuit has a path.
-	var dir = self.get_path_direction.call(self, transform.origin, -transform.basis.z)
-	for i in CTX_N_RAYS:
-		var ray: RayCast3D = self.ctx_rays.get_child(i)
-		var d := -ray.global_transform.basis.z
-		# set interest
-		self._ctx_paths[i] = max(0, d.dot(dir))
-		if ray.is_colliding():
-			# set danger - reduce interest based on obstacle type and distance
-			var obj := ray.get_collider()
-			var collision_point := ray.get_collision_point()
-			var dist := transform.origin.distance_to(collision_point)
-			var dist_factor := clamp(dist / CTX_LOOK_DISTANCE, 0.0, 1.0)
-			if Global.race_car_registry.has(obj):
-				# Other car - reduce interest based on distance (closer = less interest)
-				self._ctx_paths[i] = self._ctx_paths[i] * dist_factor * 0.3
-			else:
-				# Wall/obstacle - strongly avoid
-				self._ctx_paths[i] = self._ctx_paths[i] * dist_factor * 0.1
-
-func _next_direction() -> Vector3:
-	var dir := Vector3.ZERO
-	for i in CTX_N_RAYS:
-		var path_weight = self._ctx_paths[i] if i < len(self._ctx_paths) and self._ctx_paths[i] != null else 0.0
-		dir += -self.ctx_rays.get_child(i).global_transform.basis.z * path_weight
-	return dir.normalized()
+		return 0.0
+	
+	# Get desired direction from circuit path
+	var path_dir: Vector3 = self.get_path_direction.call(self, global_transform.origin, -global_transform.basis.z)
+	
+	# Calculate base steering to follow path
+	var forward := -global_transform.basis.z
+	var cross := forward.cross(path_dir)
+	var path_steer: float = cross.dot(global_transform.basis.y) * self.max_steering_rad * 3.0
+	path_steer = clamp(path_steer, -self.max_steering_rad, self.max_steering_rad)
+	
+	# Default to full throttle
+	self._acceleration = -self.transform.basis.z * self.pc_engine_power
+	
+	# Check for obstacles and adjust steering/throttle
+	var avoid_steer: float = 0.0
+	var should_brake := false
+	var should_slow := false
+	
+	# Front ray - brake if obstacle ahead
+	if _ai_front_ray and _ai_front_ray.is_colliding():
+		var dist: float = global_transform.origin.distance_to(_ai_front_ray.get_collision_point())
+		if dist < AI_BRAKE_DISTANCE:
+			should_brake = true
+		elif dist < AI_BRAKE_DISTANCE * 2.0:
+			should_slow = true
+	
+	# Side rays - steer away from obstacles
+	var left_blocked := false
+	var right_blocked := false
+	var left_dist: float = AI_SIDE_RAY_DISTANCE
+	var right_dist: float = AI_SIDE_RAY_DISTANCE
+	
+	if _ai_left_ray and _ai_left_ray.is_colliding():
+		left_blocked = true
+		left_dist = global_transform.origin.distance_to(_ai_left_ray.get_collision_point())
+	if _ai_right_ray and _ai_right_ray.is_colliding():
+		right_blocked = true
+		right_dist = global_transform.origin.distance_to(_ai_right_ray.get_collision_point())
+	
+	# Far side rays
+	if _ai_far_left_ray and _ai_far_left_ray.is_colliding():
+		left_blocked = true
+		var d: float = global_transform.origin.distance_to(_ai_far_left_ray.get_collision_point())
+		left_dist = min(left_dist, d)
+	if _ai_far_right_ray and _ai_far_right_ray.is_colliding():
+		right_blocked = true
+		var d: float = global_transform.origin.distance_to(_ai_far_right_ray.get_collision_point())
+		right_dist = min(right_dist, d)
+	
+	# Calculate avoidance steering
+	if left_blocked and not right_blocked:
+		avoid_steer = -self.max_steering_rad * 0.8  # Steer right
+	elif right_blocked and not left_blocked:
+		avoid_steer = self.max_steering_rad * 0.8  # Steer left
+	elif left_blocked and right_blocked:
+		# Both sides blocked - steer toward the side with more space
+		if left_dist > right_dist:
+			avoid_steer = self.max_steering_rad * 0.5
+		else:
+			avoid_steer = -self.max_steering_rad * 0.5
+		should_slow = true
+	
+	# Apply throttle/brake
+	if should_brake:
+		self._acceleration = self.transform.basis.z * self.braking_power  # Brake (reverse direction)
+	elif should_slow:
+		self._acceleration = -self.transform.basis.z * self.pc_engine_power * 0.4
+	
+	# Combine path following with obstacle avoidance
+	var final_steer: float = path_steer + avoid_steer
+	return clamp(final_steer, -self.max_steering_rad, self.max_steering_rad)
 
 
 # constructor
@@ -159,41 +215,6 @@ func _get_gravity_steering_angle() -> float:
 	if abs(strength) > self.max_steering_rad:
 		strength = self.max_steering_rad * sign(strength)
 	return strength
-
-func _get_ctx_steering_angle() -> float:
-	set_ctx_paths()
-	var dir := _next_direction()
-	# find angle - how far dir vector is to the left (negative)
-	# or right (positive) of forward (-self.transform.basis.z) vector.
-	var v = -self.transform.basis.z.cross(dir)
-	var a = v.dot(self.transform.basis.y)
-	var steer_angle = a * self.max_steering_rad * 2.0
-	self._acceleration = -self.transform.basis.z * self.pc_engine_power
-	
-	# check front rays (0 and nearby) for obstacles
-	var should_brake := false
-	var min_car_dist := CTX_LOOK_DISTANCE
-	for ray_idx in [0, 1, CTX_N_RAYS - 1]:  # forward and slightly left/right
-		var ray: RayCast3D = self.ctx_rays.get_child(ray_idx)
-		if ray.is_colliding():
-			var obj = ray.get_collider()
-			var collision_point := ray.get_collision_point()
-			var d = transform.origin.distance_to(collision_point)
-			var is_colliding_with_car := Global.race_car_registry.has(obj)
-			if is_colliding_with_car:
-				min_car_dist = min(min_car_dist, d)
-				if d < CTX_BRAKE_CAR_DISTANCE:
-					should_brake = true
-			elif d < CTX_BRAKE_DISTANCE:
-				should_brake = true
-	
-	if should_brake:
-		self._acceleration = -self.transform.basis.z * self.braking_power
-	elif min_car_dist < CTX_BRAKE_CAR_DISTANCE * 1.5:
-		# Slow down when approaching other cars
-		self._acceleration = -self.transform.basis.z * self.pc_engine_power * 0.5
-
-	return steer_angle
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_select"):
