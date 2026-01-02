@@ -1,9 +1,9 @@
 class_name Circuit
 extends Node3D
 
-const RaceCar := preload("res://race_cars/race_car.tscn")
-const Stats := preload("res://circuits/stats.gd")
-const StatsPopup: PackedScene = preload("res://ui/stats_popup.tscn")
+const RaceCarScene: PackedScene = preload("res://race_cars/race_car.tscn")
+const StatsScript := preload("res://circuits/stats.gd")
+const StatsPopupScene: PackedScene = preload("res://ui/stats_popup.tscn")
 
 var icon: Texture2D = null
 
@@ -51,13 +51,13 @@ func _circuit_ready():
 	match Global.game_play_mode:
 		Global.Mode.TIME:
 			var pos = $P1
-			var car = RaceCar.instantiate()
+			var car = RaceCarScene.instantiate()
 			self.my_race_car_id = car
 			self.race_cars.append({
 				"icon": Global.my_race_car_icon(),
 				"car": car,
 				"position": pos,
-				"stats": Stats.new(self.roads_count, self.laps_count, self.penalty)
+				"stats": StatsScript.new(self.roads_count, self.laps_count, self.penalty)
 			})
 			self.race_cars_idx[car] = 0
 			car.get_path_direction = null
@@ -69,12 +69,12 @@ func _circuit_ready():
 		Global.Mode.RACING:
 			var pos := [$P1, $P2, $P3, $P4]
 			for i in range(len(pos)):
-				var car = RaceCar.instantiate()
+				var car = RaceCarScene.instantiate()
 				self.race_cars.append({
 					"icon": Global.RACE_CAR_ICONS_SMALL[i],
 					"car": car,
 					"position": pos[i],
-					"stats": Stats.new(self.roads_count, self.laps_count, self.penalty)
+					"stats": StatsScript.new(self.roads_count, self.laps_count, self.penalty)
 				})
 				self.race_cars_idx[car] = i
 				car.call_deferred("set_physics_process", false)
@@ -89,7 +89,7 @@ func _circuit_ready():
 				add_child(car)
 				car.body.set_mesh(Global.RACE_CAR_BODIES[i])
 		_:
-			print_debug("game play mode '", Global.GamePlayMode, "' not implemented, yet")
+			print_debug("game play mode '", Global.game_play_mode, "' not implemented, yet")
 			return
 
 	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car
@@ -180,7 +180,7 @@ func _on_finish_race():
 		self.call_deferred("remove_child", rc.car)
 	results.sort_custom(Callable(ResultsSorter, "by_total"))
 
-	self.stats_popup = StatsPopup.instantiate()
+	self.stats_popup = StatsPopupScene.instantiate()
 	self.stats_popup.init(self.icon, results)
 	add_child(self.stats_popup)
 	self.circuit_control.visible = false

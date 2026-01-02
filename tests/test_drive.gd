@@ -1,8 +1,8 @@
 class_name TestDrive
 extends Node3D
 
-const RaceCar := preload("res://race_cars/race_car.tscn")
-var race_car: RaceCar = RaceCar.instantiate()
+const RaceCarScene: PackedScene = preload("res://race_cars/race_car.tscn")
+var race_car: RaceCar = RaceCarScene.instantiate()
 
 
 func _input(event: InputEvent):

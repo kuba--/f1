@@ -18,4 +18,4 @@ func _on_pressed():
 	var is_mute := AudioServer.is_bus_mute(self._bus_idx)
 	AudioServer.set_bus_mute(_bus_idx, not is_mute)
 	texture_normal = ICON_SOUND_NORMAL if is_mute else ICON_MUTE_NORMAL
-	texture_pressed = ICON_MUTE_PRESSED if is_mute else ICON_MUTE_PRESSED
+	texture_pressed = ICON_SOUND_PRESSED if is_mute else ICON_MUTE_PRESSED

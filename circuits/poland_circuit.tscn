@@ -19,6 +19,7 @@
 [ext_resource path="res://circuits/pits_office.tscn" type="PackedScene" id=17]
 [ext_resource path="res://circuits/fence_curved.tscn" type="PackedScene" id=18]
 [ext_resource path="res://circuits/overhead_round_colored.tscn" type="PackedScene" id=19]
+[ext_resource path="res://default_env.tres" type="Environment" id=20]
 
 [sub_resource type="Sky" id=1]
 sky_top_color = Color( 0.729412, 0.811765, 0.854902, 1 )
@@ -31,6 +32,11 @@ sun_energy = 3.0
 resource_local_to_scene = true
 background_mode = 2
 background_sky = SubResource( 1 )
+background_energy = 2.5
+ambient_light_color = Color( 0.95, 0.97, 1, 1 )
+ambient_light_energy = 2.0
+ambient_light_sky_contribution = 1.0
+tonemap_white = 8.0
 
 [sub_resource type="PlaneMesh" id=3]
 material = ExtResource( 3 )
@@ -132,14 +138,14 @@ current = true
 [node name="ChaseCamera" parent="." instance=ExtResource( 4 )]
 
 [node name="World" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = ExtResource( 20 )
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D( 1, 0, 0, 0, -0.866026, 0.5, 0, -0.5, -0.866026, 0, 35, 35 )
 light_color = Color( 0.87451, 0.823529, 0.823529, 1 )
-light_specular = 7.0
-shadow_enabled = true
-shadow_color = Color( 0.321569, 0.286275, 0.286275, 1 )
+light_energy = 0.0
+light_specular = 0.0
+shadow_enabled = false
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2686, 0, 0 )

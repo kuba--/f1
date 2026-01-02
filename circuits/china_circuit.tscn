@@ -19,6 +19,7 @@
 [ext_resource path="res://circuits/pits_office_roof.tscn" type="PackedScene" id=17]
 [ext_resource path="res://cameras/zoom_camera.tscn" type="PackedScene" id=19]
 [ext_resource path="res://ui/circuit_control.tscn" type="PackedScene" id=20]
+[ext_resource path="res://default_env.tres" type="Environment" id=21]
 
 [sub_resource type="Sky" id=4]
 resource_local_to_scene = true
@@ -37,7 +38,10 @@ sun_energy = 3.0
 resource_local_to_scene = true
 background_mode = 2
 background_sky = SubResource( 4 )
-background_energy = 1.5
+background_energy = 2.5
+ambient_light_color = Color( 0.792157, 0.713726, 0.509804, 1 )
+ambient_light_energy = 1.6
+ambient_light_sky_contribution = 1.0
 fog_enabled = true
 fog_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 tonemap_white = 7.99
@@ -67,7 +71,7 @@ current = true
 [node name="ChaseCamera" parent="." instance=ExtResource( 12 )]
 
 [node name="World" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = ExtResource( 21 )
 
 [node name="Ground" type="StaticBody3D" parent="."]
 

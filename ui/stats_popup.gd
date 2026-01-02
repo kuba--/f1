@@ -1,7 +1,7 @@
 class_name StatsPopup
 extends Popup
 
-const Main: PackedScene = preload("res://main.tscn")
+const MainScene: PackedScene = preload("res://main.tscn")
 
 @onready var _result_containers: Array = [
 	$VBoxContainer/ResultsContainer/VBoxContainer/P1Container,
@@ -45,5 +45,5 @@ func _set_result(p: int, r: Dictionary):
 
 
 func _on_home_pressed():
-	var err := get_tree().change_scene_to_packed(Main)
+	var err := get_tree().change_scene_to_packed(MainScene)
 	assert(err == OK, "change_scene_to_packed error %d" % err)

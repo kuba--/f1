@@ -333,11 +333,13 @@ func _align_to_slope():
 	var back_ray_normal := self.back_ray.get_collision_normal() if is_back_colliding else Vector3.UP
 
 	if is_front_colliding or is_back_colliding:
+		var prev := self.global_transform
 		var normal: Vector3 = (front_ray_normal + back_ray_normal) / 2.0
-		self.global_transform.basis.x = -self.global_transform.basis.z.cross(normal)
-		self.global_transform.basis.y = normal
-		self.global_transform.basis = self.global_transform.basis.orthonormalized()
-		self.global_transform = self.global_transform.interpolate_with(self.global_transform, self.align_interpolate_weight)
+		var target := prev
+		target.basis.x = -target.basis.z.cross(normal)
+		target.basis.y = normal
+		target.basis = target.basis.orthonormalized()
+		self.global_transform = prev.interpolate_with(target, self.align_interpolate_weight)
 
 
 func set_label(txt: String):

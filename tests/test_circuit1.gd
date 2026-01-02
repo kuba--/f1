@@ -1,8 +1,8 @@
 class_name TestCircuit1
 extends Node3D
 
-const RaceCar := preload("res://race_cars/race_car.tscn")
-var race_car: RaceCar = RaceCar.instantiate()
+const RaceCarScene: PackedScene = preload("res://race_cars/race_car.tscn")
+var race_car: RaceCar = RaceCarScene.instantiate()
 
 @onready var chase_camera = $ChaseCamera
 @onready var time_label = $CircuitControl/TimePanel/Container/TimeContainer/Label
@@ -43,7 +43,7 @@ func _on_start_body_entered(body: RaceCar):
 	print_debug("Car entered: ", body, " V: ", body._velocity.length() )
 
 
-func get_path_direction(car: RaceCar, pos: Vector3, default: Vector3) -> Vector3:
+func get_path_direction(_car: RaceCar, pos: Vector3, _default: Vector3) -> Vector3:
 	var offset: float = $Path3D.curve.get_closest_offset(pos)
 	$Path3D/PathFollow3D.offset = offset
 	return $Path3D/PathFollow3D.transform.basis.z
