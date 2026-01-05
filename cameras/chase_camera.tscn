@@ -2,5 +2,5 @@
 
 [ext_resource path="res://cameras/chase_camera.gd" type="Script" id=1]
 
-[node name="ChaseCamera" type="Camera"]
+[node name="ChaseCamera" type="Camera3D"]
 script = ExtResource( 1 )

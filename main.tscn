@@ -5,8 +5,8 @@
 [ext_resource path="res://main.gd" type="Script" id=3]
 [ext_resource path="res://ui/box_button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/options_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/Formula1Bold.ttf" type="FontFile" id=6]
+[ext_resource path="res://icon.png" type="Texture2D" id=10]
 
 [sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.964844, 0.946378, 0.946378, 0.392157 )
@@ -29,10 +29,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=26]
+[sub_resource type="FontFile" id=26]
 size = 32
-extra_spacing_top = 3
-extra_spacing_bottom = 3
+spacing_top = 3
+spacing_bottom = 3
 extra_spacing_char = 3
 extra_spacing_space = 3
 font_data = ExtResource( 6 )
@@ -221,51 +221,51 @@ script = ExtResource( 3 )
 [node name="BackgroundColorPanel" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 14 )
+theme_override_styles/panel = SubResource( 14 )
 
 [node name="BackgroundTexturePanel" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 3 )
+theme_override_styles/panel = SubResource( 3 )
 
 [node name="SettingsPanel" type="PanelContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0.196078 )
 anchor_right = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = 64.0
-custom_styles/panel = SubResource( 1 )
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel"]
-margin_left = 15.0
-margin_top = 2.0
-margin_right = 1058.0
-margin_bottom = 66.0
-custom_constants/separation = 282
+offset_left = 15.0
+offset_top = 2.0
+offset_right = 1058.0
+offset_bottom = 66.0
+theme_override_constants/separation = 282
 
 [node name="OptionsButton" parent="SettingsPanel/HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 64.0
-margin_bottom = 64.0
+offset_right = 64.0
+offset_bottom = 64.0
 
 [node name="Label" type="Label" parent="SettingsPanel/HBoxContainer"]
-margin_left = 470.0
-margin_top = 12.0
-margin_right = 553.0
-margin_bottom = 51.0
+offset_left = 470.0
+offset_top = 12.0
+offset_right = 553.0
+offset_bottom = 51.0
 size_flags_horizontal = 14
-custom_fonts/font = SubResource( 26 )
+theme_override_fonts/font = SubResource( 26 )
 text = "ABC"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="SoundButton" parent="SettingsPanel/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 979.0
-margin_right = 1043.0
-margin_bottom = 64.0
+offset_left = 979.0
+offset_right = 1043.0
+offset_bottom = 64.0
 size_flags_horizontal = 10
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
@@ -277,96 +277,96 @@ autoplay = true
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -108.0
-margin_bottom = 108.0
-custom_constants/separation = 50
+offset_top = -108.0
+offset_bottom = 108.0
+theme_override_constants/separation = 50
 
 [node name="CarContainer" type="HBoxContainer" parent="Container"]
-margin_right = 1080.0
-margin_bottom = 10.0
-custom_constants/separation = 80
+offset_right = 1080.0
+offset_bottom = 10.0
+theme_override_constants/separation = 80
 alignment = 1
 
 [node name="GreenButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
-margin_left = 400.0
-margin_right = 410.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 15 )
+offset_left = 400.0
+offset_right = 410.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 15 )
 
 [node name="OrangeButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
-margin_left = 490.0
-margin_right = 500.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 16 )
+offset_left = 490.0
+offset_right = 500.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 16 )
 
 [node name="RedButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
-margin_left = 580.0
-margin_right = 590.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 17 )
+offset_left = 580.0
+offset_right = 590.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 17 )
 
 [node name="WhiteButton" parent="Container/CarContainer" instance=ExtResource( 4 )]
-margin_left = 670.0
-margin_right = 680.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 18 )
+offset_left = 670.0
+offset_right = 680.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 18 )
 
 [node name="CircuitContainer" type="HBoxContainer" parent="Container"]
-margin_top = 60.0
-margin_right = 1080.0
-margin_bottom = 70.0
-custom_constants/separation = 50
+offset_top = 60.0
+offset_right = 1080.0
+offset_bottom = 70.0
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="ChinaButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 445.0
-margin_right = 455.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 19 )
+offset_left = 445.0
+offset_right = 455.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 19 )
 
 [node name="PolandButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 505.0
-margin_right = 515.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 20 )
+offset_left = 505.0
+offset_right = 515.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 20 )
 
 [node name="MexicoButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 565.0
-margin_right = 575.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 21 )
+offset_left = 565.0
+offset_right = 575.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 21 )
 
 [node name="BahrainButton" parent="Container/CircuitContainer" instance=ExtResource( 4 )]
-margin_left = 625.0
-margin_right = 635.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 22 )
+offset_left = 625.0
+offset_right = 635.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 22 )
 
 [node name="ModeContainer" type="HBoxContainer" parent="Container"]
 visible = false
-margin_top = 120.0
-margin_right = 1080.0
-margin_bottom = 130.0
-custom_constants/separation = 200
+offset_top = 120.0
+offset_right = 1080.0
+offset_bottom = 130.0
+theme_override_constants/separation = 200
 alignment = 1
 
 [node name="TimeButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
-margin_right = 1080.0
-margin_bottom = 10.0
-custom_styles/panel = SubResource( 23 )
+offset_right = 1080.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource( 23 )
 
 [node name="RacingButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
-margin_top = 60.0
-margin_right = 1080.0
-margin_bottom = 70.0
-custom_styles/panel = SubResource( 25 )
+offset_top = 60.0
+offset_right = 1080.0
+offset_bottom = 70.0
+theme_override_styles/panel = SubResource( 25 )
 
 [node name="MultiplayerButton" parent="Container/ModeContainer" instance=ExtResource( 4 )]
 visible = false
-margin_top = 120.0
-margin_right = 1080.0
-margin_bottom = 130.0
-custom_styles/panel = SubResource( 24 )
+offset_top = 120.0
+offset_right = 1080.0
+offset_bottom = 130.0
+theme_override_styles/panel = SubResource( 24 )
 
 [connection signal="on_pressed" from="Container/CarContainer/GreenButton" to="." method="_on_race_car_button_pressed" binds= [ 0 ]]
 [connection signal="on_pressed" from="Container/CarContainer/OrangeButton" to="." method="_on_race_car_button_pressed" binds= [ 1 ]]

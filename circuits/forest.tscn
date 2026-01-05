@@ -6,7 +6,7 @@
 [sub_resource type="PlaneMesh" id=1]
 resource_local_to_scene = true
 
-[node name="Forest" type="MeshInstance"]
+[node name="Forest" type="MeshInstance3D"]
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 script = ExtResource( 2 )

@@ -1,19 +1,19 @@
 class_name Circuit
-extends Spatial
+extends Node3D
 
-const RaceCar := preload("res://race_cars/race_car.tscn")
-const Stats := preload("res://circuits/stats.gd")
-const StatsPopup: PackedScene = preload("res://ui/stats_popup.tscn")
+const RaceCarScene: PackedScene = preload("res://race_cars/race_car.tscn")
+const StatsScript := preload("res://circuits/stats.gd")
+const StatsPopupScene: PackedScene = preload("res://ui/stats_popup.tscn")
 
-var icon: Texture = null
+var icon: Texture2D = null
 
-var my_race_car_id: int
+var my_race_car_id: RaceCar
 var race_cars: Array = [
 	# idx0: { "icon" => Texture, "stats" => Stats, "car" => RaceCar, "position" => Position3D },
 	# idx1: { "icon" => Texture, "stats" => Stats, "car" => RaceCar, "position" => Position3D },
 ]
 var race_cars_idx: Dictionary = {
-	# race_car.id => idx
+	# race_car => idx
 }
 
 class ResultsSorter:
@@ -40,48 +40,48 @@ var zoom_camera: ZoomCamera = null
 var chase_camera: ChaseCamera = null
 var road_start: RoadStart = null
 
-var get_path_direction: FuncRef = null
+var get_path_direction: Callable = Callable()
 
 var stats_popup: StatsPopup = null
 
 func _circuit_ready():
 	self.circuit_control.init(self.laps_count)
-	var err := self.road_start.connect("lights_out", self, "_on_lights_out", [], CONNECT_ONESHOT)
+	var err := self.road_start.connect("lights_out", Callable(self, "_on_lights_out").bind(), CONNECT_ONE_SHOT)
 	assert(err == OK, "road_start.connect lights_out error %d" % err)
 	match Global.game_play_mode:
 		Global.Mode.TIME:
 			var pos = $P1
-			var car = RaceCar.instance()
-			self.my_race_car_id = car.get_instance_id()
+			var car = RaceCarScene.instantiate()
+			self.my_race_car_id = car
 			self.race_cars.append({
 				"icon": Global.my_race_car_icon(),
 				"car": car,
 				"position": pos,
-				"stats": Stats.new(self.roads_count, self.laps_count, self.penalty)
+				"stats": StatsScript.new(self.roads_count, self.laps_count, self.penalty)
 			})
-			self.race_cars_idx[car.get_instance_id()] = 0
-			car.get_path_direction = null
+			self.race_cars_idx[car] = 0
+			car.get_path_direction = Callable()
 			car.call_deferred("set_physics_process", false)
-			car.translate(pos.translation)
+			car.translate(pos.position)
 			add_child(car)
 			car.body.set_mesh(Global.my_race_car_body())
 
 		Global.Mode.RACING:
 			var pos := [$P1, $P2, $P3, $P4]
 			for i in range(len(pos)):
-				var car = RaceCar.instance()
+				var car = RaceCarScene.instantiate()
 				self.race_cars.append({
 					"icon": Global.RACE_CAR_ICONS_SMALL[i],
 					"car": car,
 					"position": pos[i],
-					"stats": Stats.new(self.roads_count, self.laps_count, self.penalty)
+					"stats": StatsScript.new(self.roads_count, self.laps_count, self.penalty)
 				})
-				self.race_cars_idx[car.get_instance_id()] = i
+				self.race_cars_idx[car] = i
 				car.call_deferred("set_physics_process", false)
-				car.translate(pos[i].translation)
+				car.translate(pos[i].position)
 				if i == Global.my_race_car_idx:
-					self.my_race_car_id = car.get_instance_id()
-					car.get_path_direction = null
+					self.my_race_car_id = car
+					car.get_path_direction = Callable()
 					# car.set_label(Global.my_unique_id)
 				else:
 					car.get_path_direction = self.get_path_direction
@@ -89,15 +89,15 @@ func _circuit_ready():
 				add_child(car)
 				car.body.set_mesh(Global.RACE_CAR_BODIES[i])
 		_:
-			print_debug("game play mode '", Global.GamePlayMode, "' not implemented, yet")
+			print_debug("game play mode '", Global.game_play_mode, "' not implemented, yet")
 			return
 
 	var my_race_car = self.race_cars[self.race_cars_idx[self.my_race_car_id]].car
-	err = my_race_car.connect("camera_position_changed", self.chase_camera, "_on_camera_position_changed")
+	err = my_race_car.connect("camera_position_changed", Callable(self.chase_camera, "_on_camera_position_changed"))
 	assert(err == OK, "camera_position_changed error %d" % err)
 
-	self.zoom_camera.position = my_race_car.init_camera_position()
-	err = self.zoom_camera.connect("camera_position_set", self, "_on_zoom_camera_position_set", [], CONNECT_ONESHOT)
+	self.zoom_camera.target_marker = my_race_car.init_camera_position()
+	err = self.zoom_camera.connect("camera_position_set", Callable(self, "_on_zoom_camera_position_set").bind(), CONNECT_ONE_SHOT)
 	assert(err == OK, "camera_position_set error %d" % err)
 	# uncomment following line to skip zoom camera intro
 #	_on_zoom_camera_position_set()
@@ -121,13 +121,16 @@ func _on_zoom_camera_position_set():
 	self.road_start.lights_timer.start()
 
 
-func _on_race_car_entered(car: RaceCar, road_idx: int):
+func _on_race_car_entered(car: Node, road_idx: int):
+	if not car is RaceCar:
+		return
+
 	if not self.started:
 		return
-	# if car.get_instance_id() == self.my_race_car_id:
+	# if car == self.my_race_car_id:
 	# 	print_debug(car.get_instance_id(), " ", road_idx, " V=", car._velocity.length())
 
-	var stats: Stats = self.race_cars[self.race_cars_idx[car.get_instance_id()]].stats
+	var stats: Stats = self.race_cars[self.race_cars_idx[car]].stats
 	if stats.finished():
 		return
 	stats.set_time_elapsed(road_idx, time_elapsed)
@@ -140,7 +143,7 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 		# just started
 		return
 
-	if car.get_instance_id() == self.my_race_car_id:
+	if car == self.my_race_car_id:
 		var li: int = stats.lap_idx() - 1
 		var lt: Array = stats.lap(li)
 		self.circuit_control.set_lap(li, lt[1], lt[2])
@@ -149,7 +152,7 @@ func _on_race_car_entered(car: RaceCar, road_idx: int):
 			# finish the race
 			#
 			self.circuit_control.set_time_elapsed(stats.total()[2])
-			var err := get_tree().create_timer(1.0).connect("timeout", self, "_on_finish_race")
+			var err := get_tree().create_timer(1.0).connect("timeout", Callable(self, "_on_finish_race"))
 			assert(err == OK, "create_timer error %d" % err)
 		else:
 			self.circuit_control.set_lap_idx(stats.lap_idx())
@@ -175,9 +178,9 @@ func _on_finish_race():
 		})
 		rc.car.call_deferred("set_physics_process", false)
 		self.call_deferred("remove_child", rc.car)
-	results.sort_custom(ResultsSorter, "by_total")
+	results.sort_custom(Callable(ResultsSorter, "by_total"))
 
-	self.stats_popup = StatsPopup.instance()
+	self.stats_popup = StatsPopupScene.instantiate()
 	self.stats_popup.init(self.icon, results)
 	add_child(self.stats_popup)
 	self.circuit_control.visible = false

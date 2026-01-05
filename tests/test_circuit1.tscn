@@ -20,121 +20,121 @@
 material = ExtResource( 7 )
 size = Vector2( 100, 100 )
 
-[sub_resource type="ConvexPolygonShape" id=1]
-points = PoolVector3Array( 50, 0, 50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
+[sub_resource type="ConvexPolygonShape3D" id=1]
+points = PackedVector3Array( 50, 0, 50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
 
 [sub_resource type="Curve3D" id=3]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -12.6185, 0, -7.05663, 0, 0, 0, 0, 0, 0, -11.8558, 0, -13.063, 0, 0, 0, 0, 0, 0, -8.13756, 0, -16.2092, 0, 0, 0, 0, 0, 0, -4.32399, 0, -17.0672, 0, 0, 0, 0, 0, 0, -0.415076, 0, -15.8278, 0, 0, 0, 0, 0, 0, 1.49172, 0, -13.4444, 0, 0, 0, 0, 0, 0, 2.15909, 0, -9.82147, 0, 0, 0, 0, 0, 0, 2.06375, 0, -5.34052, 0, 0, 0, 0, 0, 0, 2.34976, 0, -0.382882, 0, 0, 0, 0, 0, 0, 2.27618, 0, 5.19451, 0, 0, 0, 0, 0, 0, 2.24076, 0, 9.30312, 0, 0, 0, 0, 0, 0, 1.21361, 0, 12.6679, 0, 0, 0, 0, 0, 0, -0.840701, 0, 15.1119, 0, 0, 0, 0, 0, 0, -4.87847, 0, 16.6349, 0, 0, 0, 0, 0, 0, -8.7884, 0, 15.9045, 0, 0, 0, 0, 0, 0, -11.1122, 0, 12.6325, 0, 0, 0, 0, 0, 0, -11.7498, 0, 8.84267, 0, 0, 0, 0, 0, 0, -11.9977, 0, 4.20277, 0, 0, 0, 0, 0, 0, -12.5998, 0, -1.25177, 0, 0, 0, 0, 0, 0, -12.6185, 0, -7.05663 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+"points": PackedVector3Array( 0, 0, 0, 0, 0, 0, -12.6185, 0, -7.05663, 0, 0, 0, 0, 0, 0, -11.8558, 0, -13.063, 0, 0, 0, 0, 0, 0, -8.13756, 0, -16.2092, 0, 0, 0, 0, 0, 0, -4.32399, 0, -17.0672, 0, 0, 0, 0, 0, 0, -0.415076, 0, -15.8278, 0, 0, 0, 0, 0, 0, 1.49172, 0, -13.4444, 0, 0, 0, 0, 0, 0, 2.15909, 0, -9.82147, 0, 0, 0, 0, 0, 0, 2.06375, 0, -5.34052, 0, 0, 0, 0, 0, 0, 2.34976, 0, -0.382882, 0, 0, 0, 0, 0, 0, 2.27618, 0, 5.19451, 0, 0, 0, 0, 0, 0, 2.24076, 0, 9.30312, 0, 0, 0, 0, 0, 0, 1.21361, 0, 12.6679, 0, 0, 0, 0, 0, 0, -0.840701, 0, 15.1119, 0, 0, 0, 0, 0, 0, -4.87847, 0, 16.6349, 0, 0, 0, 0, 0, 0, -8.7884, 0, 15.9045, 0, 0, 0, 0, 0, 0, -11.1122, 0, 12.6325, 0, 0, 0, 0, 0, 0, -11.7498, 0, 8.84267, 0, 0, 0, 0, 0, 0, -11.9977, 0, 4.20277, 0, 0, 0, 0, 0, 0, -12.5998, 0, -1.25177, 0, 0, 0, 0, 0, 0, -12.6185, 0, -7.05663 ),
+"tilts": PackedFloat32Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[node name="TestCircuit1" type="Spatial"]
+[node name="TestCircuit1" type="Node3D"]
 script = ExtResource( 4 )
 
 [node name="CircuitControl" parent="." instance=ExtResource( 1 )]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.814379, 0.580333, 0, -0.580333, 0.814379, 0, 15.5304, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.814379, 0.580333, 0, -0.580333, 0.814379, 0, 15.5304, 0 )
 light_color = Color( 0.839216, 0.839216, 0.819608, 1 )
 shadow_enabled = true
 shadow_color = Color( 0.411765, 0.392157, 0.392157, 1 )
 
-[node name="Groud" type="StaticBody" parent="."]
+[node name="Groud" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Groud"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Groud"]
 mesh = SubResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Groud"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Groud"]
 shape = SubResource( 1 )
 
 [node name="ChaseCamera" parent="." instance=ExtResource( 17 )]
 current = true
 
 [node name="RoadStart" parent="." instance=ExtResource( 3 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -15.133, 0.01, 0 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -15.133, 0.01, 0 )
 
 [node name="RoadCornerLargeBorder" parent="." instance=ExtResource( 2 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -15.1299, 0.01, -9.99993 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -15.1299, 0.01, -9.99993 )
 
 [node name="RoadCornerLargeBorder2" parent="." instance=ExtResource( 2 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -5.12983, 0.01, -19.9993 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, -5.12983, 0.01, -19.9993 )
 
 [node name="RoadStraightLong" parent="." instance=ExtResource( 13 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.86849, 0.01, -9.99984 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.86849, 0.01, -9.99984 )
 
 [node name="RoadStraightLong2" parent="." instance=ExtResource( 13 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.8676, 0.01, -0.0461445 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.8676, 0.01, -0.0461445 )
 
 [node name="RoadCornerLargeSand2" parent="." instance=ExtResource( 5 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.86852, 0.01, 9.95376 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 4.86852, 0.01, 9.95376 )
 
 [node name="RoadCornerLargeSand" parent="." instance=ExtResource( 5 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5.127, 0.01, 19.955 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -5.127, 0.01, 19.955 )
 
 [node name="OverheadRoundColored" parent="." instance=ExtResource( 11 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -2.39, 0.01, -2.745 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -2.39, 0.01, -2.745 )
 
 [node name="TreeLarge" parent="." instance=ExtResource( 12 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -4.07558, 0, -25.4644 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -4.07558, 0, -25.4644 )
 
 [node name="TreeLarge2" parent="." instance=ExtResource( 12 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -2.57477, 0, -23.4817 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -2.57477, 0, -23.4817 )
 
 [node name="TreeLarge3" parent="." instance=ExtResource( 12 )]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -2.68413, 0, -12.4404 )
+transform = Transform3D( 3, 0, 0, 0, 3, 0, 0, 0, 3, -2.68413, 0, -12.4404 )
 
 [node name="TreeLarge4" parent="." instance=ExtResource( 12 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -7.54492, 0, -12.459 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -7.54492, 0, -12.459 )
 
 [node name="LightPost" parent="." instance=ExtResource( 6 )]
-transform = Transform( -1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -7.55692, 0, 0 )
+transform = Transform3D( -1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -7.55692, 0, 0 )
 
 [node name="FenceCurved" parent="." instance=ExtResource( 8 )]
-transform = Transform( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 0.7 )
+transform = Transform3D( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 0.7 )
 collision_layer = 4
 collision_mask = 0
 
 [node name="FenceCurved2" parent="." instance=ExtResource( 8 )]
-transform = Transform( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 3.8 )
+transform = Transform3D( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 3.8 )
 collision_layer = 4
 collision_mask = 0
 
 [node name="FenceCurved3" parent="." instance=ExtResource( 8 )]
-transform = Transform( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 6.9 )
+transform = Transform3D( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.388, 0, 6.9 )
 collision_layer = 4
 collision_mask = 0
 
 [node name="FenceCurved4" parent="." instance=ExtResource( 8 )]
-transform = Transform( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.3836, 0, 10 )
+transform = Transform3D( -1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -15.3836, 0, 10 )
 
 [node name="GrandStandCovered" parent="." instance=ExtResource( 10 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -18, 0, -13.9973 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -18, 0, -13.9973 )
 
 [node name="GrandStandCovered2" parent="." instance=ExtResource( 10 )]
-transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, -14.8142, 0, -22.1881 )
+transform = Transform3D( 5, 0, 0, 0, 5, 0, 0, 0, 5, -14.8142, 0, -22.1881 )
 
 [node name="GrandStandCoveredRound" parent="." instance=ExtResource( 18 )]
-transform = Transform( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -18, 0, -19 )
+transform = Transform3D( -2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, -18, 0, -19 )
 
 [node name="GrandStandCoveredRound2" parent="." instance=ExtResource( 18 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 5.45737, 0, 22.4803 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 5.45737, 0, 22.4803 )
 
 [node name="GrandStandCovered3" parent="." instance=ExtResource( 10 )]
-transform = Transform( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 5.47282, 0, 17.4843 )
+transform = Transform3D( -2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 5.47282, 0, 17.4843 )
 
 [node name="GrandStandCovered4" parent="." instance=ExtResource( 10 )]
-transform = Transform( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 2.28305, 0, 25.6994 )
+transform = Transform3D( -5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 2.28305, 0, 25.6994 )
 
 [node name="BarrierWall" parent="." instance=ExtResource( 9 )]
-transform = Transform( 2.65, 0, 0, 0, 1.6, 0, 0, 0, 2, -18.0263, 0, 9.95488 )
+transform = Transform3D( 2.65, 0, 0, 0, 1.6, 0, 0, 0, 2, -18.0263, 0, 9.95488 )
 
-[node name="Path" type="Path" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0354195, 0, -0.0708385 )
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0354195, 0, -0.0708385 )
 curve = SubResource( 3 )
 
-[node name="PathFollow" type="PathFollow" parent="Path"]
-transform = Transform( -0.992034, 0, 0.125973, 0, 1, 0, -0.125974, 0, -0.992033, -12.6185, 0, -7.05663 )
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D( -0.992034, 0, 0.125973, 0, 1, 0, -0.125974, 0, -0.992033, -12.6185, 0, -7.05663 )
 rotation_mode = 4
 
 [connection signal="body_entered" from="RoadStart" to="." method="_on_start_body_entered"]

@@ -5,7 +5,7 @@
 [ext_resource path="res://circuits/light_post.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tests/test_drive_chase_camera.gd" type="Script" id=5]
 
-[sub_resource type="ProceduralSky" id=3]
+[sub_resource type="Sky" id=3]
 sky_top_color = Color( 0.4, 0.380392, 0.301961, 1 )
 sky_horizon_color = Color( 0.764706, 0.607843, 0.494118, 1 )
 sky_curve = 0.118756
@@ -26,25 +26,25 @@ fog_depth_enabled = false
 material = ExtResource( 3 )
 size = Vector2( 50, 50 )
 
-[sub_resource type="ConvexPolygonShape" id=1]
-points = PoolVector3Array( 25, 0, 25, -25, 0, 25, -25, 0, -25, 25, 0, -25 )
+[sub_resource type="ConvexPolygonShape3D" id=1]
+points = PackedVector3Array( 25, 0, 25, -25, 0, 25, -25, 0, -25, 25, 0, -25 )
 
-[node name="TestDriveChaseCamera" type="Spatial"]
+[node name="TestDriveChaseCamera" type="Node3D"]
 script = ExtResource( 5 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
 
-[node name="Groud" type="StaticBody" parent="."]
+[node name="Groud" type="StaticBody3D" parent="."]
 
-[node name="MeshInstance" type="MeshInstance" parent="Groud"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Groud"]
 mesh = SubResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Groud"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Groud"]
 shape = SubResource( 1 )
 
 [node name="ChaseCamera" parent="." instance=ExtResource( 1 )]
 current = true
 
 [node name="LightPost" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 4.77248, 0, 0 )
+transform = Transform3D( -1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 4.77248, 0, 0 )

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/camera_button.gd" type="Script" id=1]
-[ext_resource path="res://assets/icons/camera_l.png" type="Texture" id=2]
-[ext_resource path="res://assets/icons/camera_d.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/camera_l.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/icons/camera_d.png" type="Texture2D" id=3]
 
 [node name="CameraButton" type="TextureButton"]
 self_modulate = Color( 1, 1, 1, 0.392157 )
